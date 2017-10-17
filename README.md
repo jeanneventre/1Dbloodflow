@@ -4,9 +4,10 @@
 ### Installation
 Pour récupérer le dépôt utiliser la commande :
 ```
-git clone git@gitlab.math.u-psud.fr:Poumon/2Balloons-model.git
+git clone https://github.com/jeanneventre/1Dbloodflow
 ```
-
+à l'endroit où l'on souhaite déposer le répertoire git 
+ 
 ### Mise à jour, modifications
 Pour manipuler le dépot Git, il est possible d'utiliser soit une interface graphique (SourceTree - mac - ou Kraken - multi-plateforme) avint d'éviter l'apprentissage des commandes terminales.
 Dans tous les cas, il faut :
