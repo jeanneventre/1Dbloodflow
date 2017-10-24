@@ -73,35 +73,6 @@ int main(int argc, char *argv[])
 	}
 }
 
-	// FILE *fichierA =fopen("A.txt", "w");
-
- 	// if (fichierA != NULL) 
- 	// {
- 	// 	//for (ix=0; ix<Nx; ix++){
- 	// 		for (it=0; it<Nt;it++){
- 	// 			fprintf(fichierA, "%1f \n", A[it][Nx]);
- 	// 		}
- 	// 	//	fprintf(fichierA, "\n");
- 	// 	//}
- 	// }
-
- 	// fclose(fichierA);
-
- 	// FILE *fichierQ =fopen("Q.txt", "w");
-
- 	// if (fichierQ != NULL) 
- 	// {	
- 	// 	// int N = Nt;
- 	// 	//for (ix=0; ix<Nx; ix++){
- 	// 		for (it=0; it<Nt;it++){
- 	// 			fprintf(fichierQ, "%1f \n", Q[it][1]);
- 	// 		}
- 	// 		//fprintf(fichierQ, "\n");
- 	// 	//}
- 	// }
-
- 	// fclose(fichierQ);
-
 void rusanov (double Am, double Ap, double Qm, double Qp, double * fa, double * fq)
 {
 	double um = Qm/Am;
