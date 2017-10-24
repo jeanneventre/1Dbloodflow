@@ -46,18 +46,17 @@ void kurganov (double Am, double Ap, double Qm, double Qp,
 
 int main(){
 
-	int i=0, it=0, ix=0;
+	int i=0,ix=0,it=0;
 
-	double L = 5.;
+	double L = 1.;
 	int Nt = 2000;
 	int Nx = 100;
 	double T = 1e-2;
 	double dt = 1./Nt; 
 	double dx = L/Nx;
 
-	double A[Nt][Nx];
-	double Q[Nt][Nx];
-	double S[Nt][Nx];
+	double A[Nx];
+	double Q[Nx];
 	double fa[Nx],fq[Nx];
 
 	double tt[Nt];
@@ -65,29 +64,32 @@ int main(){
 		tt[it] = it * dt;
 	}
 
-	// resolution loop 
-	for (it=1; it<Nt;it++){
+	// initial conditions
+	for(ix=0; ix<Nx; ix++){
+		A[ix]=1.; 
+		Q[ix]=0.; 
+		S[ix]=e2 * Q[ix]/A[ix];
+	}
 
-		// boundary conditions x=0
-		Q[it][0]=fmax(0,sin(tt[it]/T)); // Q at x=0
+
+	for (i=1; i<Nn;it++){
+
+		// boundary conditions 
+		// x=0
+		A[0]=A[1];
+		Q[0]=0.01 * fmax(0,sin(tt[it]/T)); 
 		if (it>1/T){Q[it][0]=0.;}
-		A[it][0]=1.;// A at x=0
-		S[it][0]=e2 * Q[it][0]/A[it][0];	
-		// S[it][Nx]=e2 * Q[it][Nx]/A[it][Nx];	
+		// x=L
+		A[Nx-1]=1.;// A at x=L
+		Q[Nx-1]=Q[Nx-2];
 		
-		// space loop
+		// fluxes loop
 		for (ix=1; ix<Nx; ix++){
-			
-			// initial conditions
-			A[0][ix]=1.; // A at t=0
-			Q[0][ix]=0.; // Q at t=0
-			S[0][ix]=e2 * Q[0][ix]/A[0][ix];
-
-			// resolution
 			rusanov(A[it-1][ix-1],A[it-1][ix],Q[it-1][ix-1], Q[it-1][ix],&fa[ix],&fq[ix]);
-			A[it][ix] = A[it-1][ix] + dt/dx *(fa[ix-1] - fa[ix]) ;
-			Q[it][ix] = Q[it-1][ix] + dt/dx *(fq[ix-1] - fq[ix])  - dt*S[it-1][ix];
-			S[it][ix] = e2 * Q[it][ix]/A[it][ix];
+		}
+		for (ix=1; ix<Nx-1; ix++){
+			A[ix] = A[ix] + dt/dx *(fa[ix] - fa[ix+1]) ;
+			Q[ix] = Q[ix] + dt/dx *(fq[ix] - fq[ix+1])  - dt*e2 * Q[ix]/A[ix];
  		}
  		//
  	}
