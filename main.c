@@ -71,6 +71,8 @@ int main(int argc, char *argv[])
 	    fprintf(fichierA,"\n \n");
 		fprintf(fichierQ,"\n \n");
 	}
+
+
 }
 
 void rusanov (double Am, double Ap, double Qm, double Qp, double * fa, double * fq)
@@ -103,4 +105,12 @@ void kurganov (double Am, double Ap, double Qm, double Qp, double * fa, double *
    	{
     	*fa = *fq = 0.;
    	}
+}
+
+void windkessel (double r, double C, double R, double * P, double Qp, double Q)
+{
+	int N = 100; 
+	double dt = 1e-5;
+
+	*P = *P * (1 - dt /(R*C)) + R * Qp +  (dt/C * (1+r/R) - R) * Q;
 }
