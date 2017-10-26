@@ -10,6 +10,9 @@ void elastance_ventricule_left(double t, double * E)
 	double tvc= 0.;
 	double Tvcp= 0.3;
 
+	double plv = 9.3 ;
+	double S = 0.0005 * plv;
+
 	double e;
 
 	if(t>=0) && (t<= Tvcp)
@@ -39,6 +42,9 @@ void elastance_ventricule_right(double t, double * E)
 	double tvc= 0.;
 	double Tvcp= 0.3;
 
+	double prv = 6.3;
+	double S = 0.0005 * prv;
+
 	double e; 
 
 	if(t>=0) && (t<= Tvcp)
@@ -67,6 +73,9 @@ void elastance_atrium_left(double t)
 	double T0 = 1.;
 	double tac= 0.8;
 	double Tacp= 0.17;
+
+	double pla = 8.1;
+	double S = 0.0005 * pla;
 
 	double e;
 
@@ -101,6 +110,9 @@ void elastance_atrium_right(double t)
 	double T0 = 1.;
 	double tac= 0.8;
 	double Tacp= 0.17;
+
+	double pra = 5.3;
+	double S = 0.0005 * pra;
 
 	double e;
 
