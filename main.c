@@ -11,21 +11,24 @@ int main(int argc, char *argv[])
 
 	int it,j,ix;
 
-	double L = 1.;
+	double L = 2.;
 	int Nx = 100;
 	double dx = L/Nx;
 
 	double t=0.;
-	double dt = 1e-5; 
-	int Nt = 1000;
-	//double T = 6e-2;
+	double dt = 1e-5;
+	int Nt = 800;
+
 	double omega = 1.;
 	double amp = 0.01;
-	
 
 	double A[Nx];
 	double Q[Nx];
+	double P[Nx];
 	double fa[Nx],fq[Nx];
+
+	double R=0.005;
+	double K= 1e3;
 
 	void kurganov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	void rusanov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
@@ -39,7 +42,7 @@ int main(int argc, char *argv[])
 	FILE *fichierA =fopen("A.txt", "w");
 	FILE *fichierQ =fopen("Q.txt", "w");
 
-	for (j=0; j<100; j++){
+	for (j=0; j<2500; j++){
 		// time loop 
 		for (it=0; it<Nt;it++){
 
@@ -48,11 +51,10 @@ int main(int argc, char *argv[])
 			// boundary conditions 
 			// x=0
 			A[0]=A[1];
-			Q[0]=  fmax(0,sin(2*3.14*omega*t)); //amp *sin(2*3.1415*omega*t);
-			//if (i>1/T){Q[0]=0.;}
+			Q[0]=  amp *fmax(0,sin(2*3.14*omega*t*(t<1))); //amp *sin(2*3.1415*omega*t);
 			// x=L
-			A[Nx-1]=1.;// A at x=L
-			Q[Nx-1]=Q[Nx-2];
+			A[Nx-1]= A[Nx-2];
+			Q[Nx-1]= Q[Nx-2] ;//+ K/R*A[Nx-2];
 		
 			// fluxes loop
 			for (ix=1; ix<Nx; ix++){
@@ -71,8 +73,6 @@ int main(int argc, char *argv[])
 	    fprintf(fichierA,"\n \n");
 		fprintf(fichierQ,"\n \n");
 	}
-
-
 }
 
 void rusanov (double Am, double Ap, double Qm, double Qp, double * fa, double * fq)
@@ -105,12 +105,4 @@ void kurganov (double Am, double Ap, double Qm, double Qp, double * fa, double *
    	{
     	*fa = *fq = 0.;
    	}
-}
-
-void windkessel (double r, double C, double R, double * P, double Qp, double Q)
-{
-	int N = 100; 
-	double dt = 1e-5;
-
-	*P = *P * (1 - dt /(R*C)) + R * Qp +  (dt/C * (1+r/R) - R) * Q;
 }
