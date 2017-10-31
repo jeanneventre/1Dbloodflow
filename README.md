@@ -2,11 +2,11 @@
 ## Installation et bases GIT
 
 ### Installation
-Pour récupérer le dépôt utiliser la commande :
+Pour récupérer le dépôt, utiliser la commande :
 ```
-git clone https://github.com/jeanneventre/1Dbloodflow
+git clone https://github.com/monidentifiant/monprojet
 ```
-à l'endroit où l'on souhaite déposer le répertoire git 
+à l'endroit où l'on souhaite déposer le répertoire git. 
  
 ### Mise à jour, modifications
 Pour manipuler le dépot Git, il est possible d'utiliser soit une interface graphique (SourceTree - mac - ou Kraken - multi-plateforme) avint d'éviter l'apprentissage des commandes terminales.
