@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 			Q[0]=  amp *fmax(0,sin(2*3.14*omega*t*(t<1))); //amp *sin(2*3.1415*omega*t);
 			// x=L
 			A[Nx-1]= A[Nx-2];
-			Q[Nx-1]= Q[Nx-2] ;//+ K/R*A[Nx-2];
+			Q[Nx-1]= 0.;//+ K/R*A[Nx-2];
 		
 			// fluxes loop
 			for (ix=1; ix<Nx; ix++){
