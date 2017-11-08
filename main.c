@@ -2,6 +2,9 @@
 #include "stdlib.h"
 #include "math.h"
 #include "fluxes.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 
 int main(int argc, char *argv[])
@@ -41,8 +44,9 @@ int main(int argc, char *argv[])
 		Q[ix]=0.;
 	}
 
-	FILE *fichierA =fopen("A.txt", "w");
-	FILE *fichierQ =fopen("Q.txt", "w");
+	int result = mkdir("output", 0777);
+	FILE *fichierA =fopen("output/A.txt", "w");
+	FILE *fichierQ =fopen("output/Q.txt", "w");
 
 	for (j=0; j<1000; j++){
 		// time loop 
