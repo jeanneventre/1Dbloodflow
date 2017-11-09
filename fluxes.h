@@ -56,11 +56,11 @@ void rusanov_Varga2 (double Am, double Ap, double Qm, double Qp, double *fa, dou
 	double up = Qp/Ap;
 	double cc = e1;
 
-	double cp = sqrt(cc * (3*pow(Ap,-3./2.) - pow(Ap,-1./2. ))), cm = sqrt(cc * (3*pow(Am,-3./2.) - pow(Am,-1./2. )));
+	double cp = sqrt(cc * (3./2.*pow(Ap,-3./2.) -1./2.* pow(Ap,-1./2. ))), cm = sqrt(cc * (3./2.*pow(Am,-3./2.) - 1./2.*pow(Am,-1./2. )));
 	double a = fmax(fabs(cp), fabs(cm));
 
 	*fa = (Qm + Qp)/2. - a * (Ap - Am)/2.;
-	*fq = (sq(Qm)/Am + cc*sq(Am) - cc/sqrt(Am) + sq(Qp)/Ap + cc* sqrt(Ap) - cc/sqrt(Ap))/2. - a * (Qp - Qm)/2.;
+	*fq = (sq(Qm)/Am - cc*sqrt(Am) - 3*cc/sqrt(Am) + sq(Qp)/Ap - cc* sqrt(Ap) -3* cc/sqrt(Ap))/2. - a * (Qp - Qm)/2.;
 }
 
 void rusanov_NeoHooke (double Am, double Ap, double Qm, double Qp, double * fa, double *fq)
