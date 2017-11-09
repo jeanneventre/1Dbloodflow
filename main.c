@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	int it,j,ix;
 
 	double L = 2.;
-	int Nx = 100;
+	int Nx = 200;
 	double dx = L/Nx;
 
 	double t=0.;
@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	int Nt = 800;
 
 	double omega = 1.;
-	double amp = 2;
+	double amp = 1.;
 
 	double A[Nx];
 	double Q[Nx];
@@ -32,9 +32,9 @@ int main(int argc, char *argv[])
 
 	// void kurganov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
-	// void rusanov2 (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
+	void rusanov2 (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov_Varga (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
-	void rusanov_Varga2(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
+	// void rusanov_Varga2(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov_NeoHooke (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 
 	// initial conditions
@@ -45,8 +45,8 @@ int main(int argc, char *argv[])
 
     int result = mkdir("output", 0777);
 
-    FILE *fichierA =fopen("output/A_Varga_amp2.txt", "w");
-	FILE *fichierQ =fopen("output/Q_Varga_amp2.txt", "w");
+    FILE *fichierA =fopen("output/A_elastic2_amp1.txt", "w");
+	FILE *fichierQ =fopen("output/Q_elastic2_amp1.txt", "w");
 
 	// double N = 1000./(2*3.1415*c);
 	for (j=0; j< 300; j++){
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 			Q[Nx-1]= 0;		
 			// fluxes loop
 			for (ix=1; ix<Nx; ix++){
-				rusanov_Varga2(A[ix-1],A[ix],Q[ix-1], Q[ix],&fa[ix],&fq[ix]);
+				rusanov2(A[ix-1],A[ix],Q[ix-1], Q[ix],&fa[ix],&fq[ix]);
 			}
 			for (ix=1; ix<Nx-1; ix++){
 				A[ix] = A[ix] + dt/dx *(fa[ix] - fa[ix+1]) ;
