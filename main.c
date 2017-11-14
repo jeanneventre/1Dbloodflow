@@ -7,7 +7,6 @@
 
 int main(int argc, char *argv[])
 {
-
 	int it,j,ix;
 
 	double L = 2.;
@@ -19,11 +18,12 @@ int main(int argc, char *argv[])
 	int Nt = 800;
 
 	double omega = 1.;
-	double amp = 1.5;
+	double amp =0.0001;
 
 	double A[Nx];
 	double Q[Nx];
 	double P[Nx];
+	double Qana[Nx];
 	double fa[Nx],fq[Nx];
 
 	double R=0.005;
@@ -31,25 +31,27 @@ int main(int argc, char *argv[])
 	double c=1;
 
 	// void kurganov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
-	// void rusanov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
+	void rusanov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov2 (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov_Varga (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov_Varga2(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
-	void rusanov_NeoHooke (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
+	// void rusanov_NeoHooke(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 
 	// initial conditions
 	for(ix=0; ix<Nx; ix++){
 		A[ix]=1.; 
 		Q[ix]=0.;
+		Qana[ix]=0.;
 	}
 
     int result = mkdir("output", 0777);
 
-    FILE *fichierA =fopen("output/A_NH_amp1_5.txt", "w");
-	FILE *fichierQ =fopen("output/Q_NH_amp1_5.txt", "w");
+    FILE *fichierA =fopen("output/A_elastic1_amp0_0001.txt", "w");
+	FILE *fichierQ =fopen("output/Q_elastic1_amp0_0001.txt", "w");
+	FILE *fichierQana =fopen("output/Qana.txt", "w");
 
 	// double N = 1000./(2*3.1415*c);
-	for (j=0; j< 1000; j++){
+	for (j=0; j< 100; j++){
 		// time loop 
 		for (it=0; it<Nt;it++){
 
@@ -64,26 +66,35 @@ int main(int argc, char *argv[])
 			Q[Nx-1]= 0;	
 			// fluxes loop
 			for (ix=1; ix<Nx; ix++){
-				rusanov_NeoHooke(A[ix-1],A[ix],Q[ix-1], Q[ix],&fa[ix],&fq[ix]);
+				rusanov(A[ix-1],A[ix],Q[ix-1], Q[ix],&fa[ix],&fq[ix]);
 			}
 			for (ix=1; ix<Nx-1; ix++){
 				A[ix] = A[ix] + dt/dx *(fa[ix] - fa[ix+1]) ;
 				Q[ix] = Q[ix] + dt/dx *(fq[ix] - fq[ix+1])  - dt*e2 * Q[ix]/A[ix];
  			}
+ 			for (ix=0; ix<Nx;ix++){
+ 				Qana[ix]= amp * fmax(0,-sin(2*3.1415*(omega*ix*dx-omega*t)))*exp(-0.05 *ix*dx);
+ 			}
  		}
 	 	for(ix=0;ix<Nx;ix++) {  
 	 		fprintf(fichierA, "%1f %1f \n", ix*dx, A[ix]);
 	 		fprintf(fichierQ, "%1f %1f \n", ix*dx, Q[ix]/amp);
+	 		fprintf(fichierQana, "%1f %1f \n", ix*dx, Qana[ix]/amp);
       	}
+
 	    fprintf(fichierA,"\n \n");
 		fprintf(fichierQ,"\n \n");
+		fprintf(fichierQana, "\n \n");
 	}
 
-	// t = Nt * dt * 120;
-	// double Qana[Nx];
-	// FILE *fichierQana = fopen("output/Qana.txt", "w");
-	// for(ix=0;ix<Nx; ix++){
-	// 	Qana[ix] = amp *fmax(0,sin(ix*dx-omega*t*(t<1)));
-	// 	fprintf(fichierQana, "%1f %1f \n",ix*dx, Qana[ix]/amp);
-	// }
+	int i;
+	double integrale=0., integrale2=0.;	
+
+	for (i=20;i<100;i++){
+		integrale += (Qana[i]/amp+Qana[i-1]/amp)/2 * dx;
+		integrale2 += (Q[i]/amp+Q[i-1]/amp)/2 * dx;
+	}
+	printf("integrale de Qana = %1f", integrale);
+	printf("\n integrale de Q = %1f", integrale2);
+
 }
