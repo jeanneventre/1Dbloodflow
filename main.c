@@ -48,10 +48,17 @@ int main(int argc, char *argv[])
 
     FILE *fichierA =fopen("output/A_elastic1_amp0_0001.txt", "w");
 	FILE *fichierQ =fopen("output/Q_elastic1_amp0_0001.txt", "w");
-	FILE *fichierQana =fopen("output/Qana.txt", "w");
+	FILE *fichierQana =fopen("output/Qana1.txt", "w");
 
-	// double N = 1000./(2*3.1415*c);
-	for (j=0; j< 100; j++){
+// int k=0,i=0;
+// double integrale, integrale2;
+// double amplitude[12] = {0.00001,0.00005,0.0001,0.0005,0.001,0.005,0.01,0.05,0.1,0.5,1,1.5};
+// double err;
+// FILE *f_err=fopen("output/err_amp.txt", "w");
+
+// for(k=0;k<12;k++){
+// 	amp = amplitude[k];
+	for (j=0; j< 101; j++){
 		// time loop 
 		for (it=0; it<Nt;it++){
 
@@ -87,14 +94,17 @@ int main(int argc, char *argv[])
 		fprintf(fichierQana, "\n \n");
 	}
 
-	int i;
-	double integrale=0., integrale2=0.;	
+// 	integrale=0.;
+// 	integrale2=0.;	
 
-	for (i=20;i<100;i++){
-		integrale += (Qana[i]/amp+Qana[i-1]/amp)/2 * dx;
-		integrale2 += (Q[i]/amp+Q[i-1]/amp)/2 * dx;
-	}
-	printf("integrale de Qana = %1f", integrale);
-	printf("\n integrale de Q = %1f", integrale2);
+// 	for (i=1;i<126;i++){
+// 		integrale += (Qana[i]/amp+Qana[i-1]/amp)/2 * dx;
+// 		integrale2 += (Q[i]/amp+Q[i-1]/amp)/2 * dx;
+// 	}
 
+// 	printf("int Qana : %1f    amplitude : %1f \n", integrale, amp);
+//  	err = integrale -integrale2;
+
+//  	fprintf(f_err, "%1f %1f  \n",amp, integrale);
+// }
 }
