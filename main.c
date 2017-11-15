@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 	int Nt = 800;
 
 	double omega = 1.;
-	double amp =0.0001;
+	double amp =1.5;
 
 	double A[Nx];
 	double Q[Nx];
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 	// void rusanov_Varga2(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov_NeoHooke(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 
-	// initial conditions
+	// iniital conditions
 	for(ix=0; ix<Nx; ix++){
 		A[ix]=1.; 
 		Q[ix]=0.;
@@ -46,17 +46,17 @@ int main(int argc, char *argv[])
 
     int result = mkdir("output", 0777);
 
-    FILE *fichierA =fopen("output/A_elastic1_amp0_0001.txt", "w");
-	FILE *fichierQ =fopen("output/Q_elastic1_amp0_0001.txt", "w");
-	FILE *fichierQana =fopen("output/Qana1.txt", "w");
+ //    FILE *fichierA =fopen("output/A_elastic1_amp0_0001.txt", "w");
+	// FILE *fichierQ =fopen("output/Q_elastic1_amp0_0001.txt", "w");
+	// FILE *fichierQana =fopen("output/Qana1.txt", "w");
 
-// int k=0,i=0;
-// double integrale, integrale2;
-// double amplitude[12] = {0.00001,0.00005,0.0001,0.0005,0.001,0.005,0.01,0.05,0.1,0.5,1,1.5};
-// double err;
-// FILE *f_err=fopen("output/err_amp.txt", "w");
-
-// for(k=0;k<12;k++){
+	int i=0;
+	double integrale[3], integrale2[3];	
+	double err;
+	// FILE *f_err=fopen("output/err_amp.txt", "w");
+	int k=0;
+	double amplitude[3] = {0.01,0.01,1.};
+// while(k<3){
 // 	amp = amplitude[k];
 	for (j=0; j< 101; j++){
 		// time loop 
@@ -83,28 +83,39 @@ int main(int argc, char *argv[])
  				Qana[ix]= amp * fmax(0,-sin(2*3.1415*(omega*ix*dx-omega*t)))*exp(-0.05 *ix*dx);
  			}
  		}
-	 	for(ix=0;ix<Nx;ix++) {  
-	 		fprintf(fichierA, "%1f %1f \n", ix*dx, A[ix]);
-	 		fprintf(fichierQ, "%1f %1f \n", ix*dx, Q[ix]/amp);
-	 		fprintf(fichierQana, "%1f %1f \n", ix*dx, Qana[ix]/amp);
-      	}
 
-	    fprintf(fichierA,"\n \n");
-		fprintf(fichierQ,"\n \n");
-		fprintf(fichierQana, "\n \n");
+ 	// 	// ecriture dans des fichiers texte :
+	 // 	for(ix=0;ix<Nx;ix++) {  
+	 // 		fprintf(fichierA, "%1f %1f \n", ix*dx, A[ix]);
+	 // 		fprintf(fichierQ, "%1f %1f \n", ix*dx, Q[ix]/amp);
+	 // 		fprintf(fichierQana, "%1f %1f \n", ix*dx, Qana[ix]/amp);
+  //     	}
+ 	// 	// 
+ 	// 	// saut de 2 lignes pour gnuplot
+	 //    fprintf(fichierA,"\n \n");
+		// fprintf(fichierQ,"\n \n");
+		// fprintf(fichierQana, "\n \n");
+ 	// 	//
 	}
 
-// 	integrale=0.;
-// 	integrale2=0.;	
 
-// 	for (i=1;i<126;i++){
-// 		integrale += (Qana[i]/amp+Qana[i-1]/amp)/2 * dx;
-// 		integrale2 += (Q[i]/amp+Q[i-1]/amp)/2 * dx;
-// 	}
 
-// 	printf("int Qana : %1f    amplitude : %1f \n", integrale, amp);
-//  	err = integrale -integrale2;
+	for (i=1;i<126;i++){
+		integrale[k] += (Qana[i]/amp+Qana[i-1]/amp)/2 * dx;
+	}
 
-//  	fprintf(f_err, "%1f %1f  \n",amp, integrale);
+	for (i=1;i<126;i++){
+		integrale2[k] += (Q[i]/amp+Q[i-1]/amp)/2 * dx;
+ 	}
+
+ 	err = integrale2 - integrale;
+
+	printf("%1f %1f ",amp,integrale[k] );
+	printf("%1f %1f \n", integrale2[k], err);
+
+	// integrale=0.;
+	// integrale2=0.;	
+ 	// fprintf(f_err, "%1f %1f  \n",amp, integrale2);
+// k++;
 // }
-}
+} // fin main 
