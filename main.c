@@ -31,8 +31,8 @@ int main(int argc, char *argv[])
 	double c=1;
 
 	// void kurganov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
-	void rusanov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
-	// void rusanov2 (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
+	// void rusanov (double/ Am, double Ap, double Qm, double Qp,double * fa, double * fq);
+	void rusanov2 (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov_Varga (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov_Varga2(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov_NeoHooke(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
@@ -51,11 +51,10 @@ int main(int argc, char *argv[])
 	// FILE *fichierQana =fopen("output/Qana1.txt", "w");
 
 	int i=0;
-	double integrale[3], integrale2[3];	
+	double integrale, integrale2;	
 	double err;
-	// FILE *f_err=fopen("output/err_amp.txt", "w");
+	FILE *f_err=fopen("output/err_amp2.txt", "w");
 	int k=0;
-	double amplitude[3] = {0.01,0.01,1.};
 // while(k<3){
 // 	amp = amplitude[k];
 	for (j=0; j< 101; j++){
@@ -98,23 +97,23 @@ int main(int argc, char *argv[])
  	// 	//
 	}
 
-
+	integrale=0.;
+	integrale2=0.;
 
 	for (i=1;i<126;i++){
-		integrale[k] += (Qana[i]/amp+Qana[i-1]/amp)/2 * dx;
+		integrale += (Qana[i]/amp+Qana[i-1]/amp)/2 * dx;
 	}
 
 	for (i=1;i<126;i++){
-		integrale2[k] += (Q[i]/amp+Q[i-1]/amp)/2 * dx;
+		integrale2+= (Q[i]/amp+Q[i-1]/amp)/2 * dx;
  	}
 
  	err = integrale2 - integrale;
 
-	printf("%1f %1f ",amp,integrale[k] );
-	printf("%1f %1f \n", integrale2[k], err);
+	printf("%1f %1f ",amp,integrale );
+	printf("%1f %1f \n", integrale2, err);
 
-	// integrale=0.;
-	// integrale2=0.;	
+		
  	// fprintf(f_err, "%1f %1f  \n",amp, integrale2);
 // k++;
 // }
