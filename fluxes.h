@@ -46,7 +46,7 @@ void rusanov_Varga (double Am, double Ap, double Qm, double Qp, double *fa, doub
 	double a = fmax(fabs(cp), fabs(cm));
 	
 	*fa = (Qm + Qp)/2. - a * (Ap - Am)/2.;
-	*fq = (sq(Qm)/Am + e3*pow(Am, 3./2.)+ e4* sqrt(Am) + sq(Qp)/Ap + e3*pow(Ap, 3./2.) +e4 * sqrt(Ap))/2. - a * (Qp - Qm)/2.;
+	*fq = (sq(Qm)/Am + e3*pow(Am, 3./2.)+ 2*e1* sqrt(Am) + sq(Qp)/Ap + e3*pow(Ap, 3./2.) + 2*e1 * sqrt(Ap))/2. - a * (Qp - Qm)/2.;
 }
 
 void rusanov_Varga2 (double Am, double Ap, double Qm, double Qp, double *fa, double *fq)
@@ -65,7 +65,7 @@ void rusanov_Varga2 (double Am, double Ap, double Qm, double Qp, double *fa, dou
 void rusanov_NeoHooke (double Am, double Ap, double Qm, double Qp, double * fa, double *fq)
 {
 	// p = K/2 *(1 - (A/A0)²)
-	
+
 	double um = Qm/Am;
 	double up = Qp/Ap;
 	double cp = sqrt(2.*e1/(Ap*Ap)), cm = sqrt(2.*e1/(Am*Am));
@@ -74,6 +74,30 @@ void rusanov_NeoHooke (double Am, double Ap, double Qm, double Qp, double * fa, 
 	*fa = (Qm + Qp)/2. - a * (Ap - Am)/2.;
 	*fq = (sq(Qm)/Am -2.*e1/Am + sq(Qp)/Ap -2.*e1/Ap)/2. - a * (Qp - Qm)/2.;
 }
+
+// void Fung(double Am, double Ap, double Qm, double Qp, double * fa, double * fq)
+// {
+// 	// exponential law of Fung's type
+// 	double beta = 90; 
+// 	double alpha = 1.5;
+
+// 	double um = Qm/Am;
+// 	double up = Qp/ap;
+
+// 	double Fp = beta *(exponential(alpha * (sqrt(Ap)-1.) - 1. - alpha * (sqrt(Ap) -1.)));
+// 	double Fm = beta *(exponential(alpha * (sqrt(Am)-1.) - 1. - alpha * (sqrt(Am) -1.)));
+	
+// 	double Fpp = beta * (1/(2*sqrt(Ap)) * exponential (alpha *(sqrt(Ap)-1.)) - alpha /(2.*sqrt(Ap)));
+// 	double Fmm = beta * (1/(2*sqrt(Am)) * exponential (alpha *(sqrt(Am)-1.)) - alpha /(2.*sqrt(Am)));
+	
+// 	double cp = sqrt(-K/Ap * Fp  + K * Fpp  + 2.*e1 * (-1./(4.*sqrt(Ap)) + 1./Ap));
+// 	double cm = sqrt(-K/Am * Fm  + K * Fmm  + 2.*e1 * (-1./(4.*sqrt(Am)) + 1./Am));
+// 	double a = fmax(fabs(cp), fabs(cm));
+
+// 	*fa = (Qm + Qp)/2. - a * (Ap - Am)/2;
+// 	*fq = (sq(Qm)/Am + sq(Qp)/Ap)/2. - a * (Qp - Qm)/2. ;
+
+// }
 
 void kurganov (double Am, double Ap, double Qm, double Qp, double * fa, double * fq)
 {

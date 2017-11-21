@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
 		integrale_ana+= integrale(Qana[i], Qana[i-1],amp,dx);
 	}
 	for (i=1;i<Nx;i++){
-		integrale_Q+= integrale (Q[i], Q[i-1], amp, dx);
+		integrale_Q+= integrale(Q[i], Q[i-1], amp, dx);
  	}
 
  	err = integrale_ana - integrale_Q;
