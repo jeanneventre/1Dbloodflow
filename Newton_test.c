@@ -158,8 +158,17 @@ int main(int argc, char *argv[])
 	int maxIter=100;
 	a= Newton(2,f_outlet_R,Q,A,par,maxIter, tol,dx);
 	
+	double b[1000];
+	int i;
+	double dA = 1e-2;
+	A = 0;
 
-	
+	FILE * fichier=fopen("test.txt","w");
+	for (i=0;i<1000;i++){
+		A +=dA;
+		b[i] = f_outlet_R(A,Q,par);
+		fprintf(fichier, "%1f %1F \n", A,b[i]);
+	}
 
 	// printf("test %1f \n ", a);
 	// printf("test 2 : %1F \n", fp(2, 4, f_outlet_R,Q,par, dx));
