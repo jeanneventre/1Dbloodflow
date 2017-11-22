@@ -34,26 +34,26 @@ double f_outlet_R(double A, double Q, double par[4])
 	double res;
 
 	double P = AtoP(A,A0,K) ;
-
+	// printf("P: %1F",P );
 	res = Q-(P - PL)/R ;
 
 	return res;
 }
 
-double fp_outlet_R(double A, double Q, double par[4])
-{
-	double R = par[0];
-	double A0= par[1];
-	double K = par[2];
-	double PL= par[3];
-	double res;
+// double fp_outlet_R(double A, double Q, double par[4])
+// {
+// 	double R = par[0];
+// 	double A0= par[1];
+// 	double K = par[2];
+// 	double PL= par[3];
+// 	double res;
 
-	double P = AtoP(A,A0,K) ;
+// 	double P = AtoP(A,A0,K) ;
 
-	res = -1/R ;
+// 	res = -1/R ;
 
-	return res; 
-}
+// 	return res; 
+// }
 
 double fp(double x, int n, double (*f)(double x, double Q, double par[n]), double Q,double par[n], double dx)
 {
@@ -93,56 +93,48 @@ double Newton(int n,double(*f)(double A, double Q, double par[n]),
 	return xk ;
 }
 
-// double f_outlet_RC(double Ap1, double Qp1, double * par)
-// {
-// 	double R = par[0];
-// 	double C = par[1];
-// 	double dt= par[2];
-// 	double A = par[3];
-// 	double A0= par[4];
-// 	double K = par[5];
-// 	double PL= par[6];
-// 	double res;
+double f_outlet_RC(double Ap1, double Qp1, double * par)
+{
+	double R = par[0];
+	double C = par[1];
+	double dt= par[2];
+	double A = par[3];
+	double A0= par[4];
+	double K = par[5];
+	double PL= par[6];
+	double res;
 
-// 	double Pp1, P;
-// 	Pp1 = AtoP(Ap1, A0, K);
-// 	P = AtoP(A, A0, K); 
+	double Pp1, P;
+	Pp1 = AtoP(Ap1, A0, K);
+	P = AtoP(A, A0, K); 
 
-// 	res = - C * (Pp1 - P) + dt * (Qp1 - (Pp1-PL)/R);
+	res = - C * (Pp1 - P) + dt * (Qp1 - (Pp1-PL)/R);
 
-// 	return res;
-// }
-
-// double fp_outlet_RC(double Ap1, double Qp1, int size, double par[size])
-// {
-// 	double R = par[0];
-// 	double C = par[1];
-// 	double dt= par[2];
-// 	double A = par[3];
-// 	double A0= par[4];
-// 	double K = par[5];
-// 	double PL= par[6];
-// 	double res;
-
-// 	res = - C - dt/R;
-
-// 	return res;
-// }
+	return res;
+}
 
 int main(int argc, char *argv[])
 {
-	int size = 4.;
-	double par[size];
-	par[0] = 5000;
-	par[1] = 1.;
-	par[2] = 1333;
-	par[3] = 0.;
-
 	double A,Q;
 	A = 1.05;
 	Q = 0.01;
+	// int size = 4.;
+	// double par[size];
+	// par[0] = 5.;
+	// par[1] = 1.;
+	// par[2] = 1333;
+	// par[3] = 0.;
 
-	int N=3;
+	// RC 
+	int size=7;
+	double par[size];
+	par[0] = 10;
+	par[1] = 0.01;
+	par[2] = 1e-5;
+	par[3] = A;
+	par[4] = 1.;
+	par[5] = 1333.;
+	par[6] = 0.;
 
 	// double (* f)(double * AQ, double * par);
 	// double (* fp)(double * AQ, double * par);
@@ -150,13 +142,13 @@ int main(int argc, char *argv[])
 	// f = &f_outlet_R;
 	// fp = &fp_outlet_R;
 
-	// printf("test : %f \n test prime : %f \n", f_outlet_R(A,Q,par), fp_outlet_R(A,Q,par));
+	// printf("test : %f \n test prime : %f \n", f_outlet_R(A,Q,par));
 
 	double a;
 	double tol = 1e-8;
-	double dx=1e-4;
-	int maxIter=100;
-	a= Newton(2,f_outlet_R,Q,A,par,maxIter, tol,dx);
+	double dx=1e-5;
+	int maxIter=10;
+	a= Newton(size,f_outlet_RC,Q,A,par,maxIter, tol,dx);
 	
 	double b[1000];
 	int i;
@@ -166,10 +158,13 @@ int main(int argc, char *argv[])
 	FILE * fichier=fopen("test.txt","w");
 	for (i=0;i<1000;i++){
 		A +=dA;
-		b[i] = f_outlet_R(A,Q,par);
+		b[i] = f_outlet_RC(A,Q,par);
 		fprintf(fichier, "%1f %1F \n", A,b[i]);
 	}
 
 	// printf("test %1f \n ", a);
 	// printf("test 2 : %1F \n", fp(2, 4, f_outlet_R,Q,par, dx));
+
+
+
 }

@@ -56,11 +56,11 @@ int main(int argc, char *argv[])
 //----------------------------------------------------------------------------------------------------------		
 	double par[4];
 	double guess = 1.5;
-	double maxIter=10;
-	double tol=1e-6;
-	double h=1e-3;
+	double maxIter=15;
+	double tol=1e-8;
+	double h=1e-4;
 
-	par[0] = 5000; // R
+	par[0] = 10000.; // R
 	par[1] = 1.; // A0
 	par[2] = 1333; // K
 	par[3] = 0.; // Pout
@@ -77,9 +77,9 @@ int main(int argc, char *argv[])
 			A[0]=A[1];
 			Q[0]=  amp *fmax(0,sin(2*3.1415*omega*t*(t<1))); //amp *sin(2*3.1415*omega*t);
 			// x=L : 
-			// A[Nx-1]= A[Nx-2];
-			Q[Nx-1]= Q[Nx-2];	
-			A[Nx-1] = Newton(4,f_outlet_R,Q[Nx-1],guess,par,maxIter, tol,h);
+			A[Nx-1]= A[Nx-2];
+			Q[Nx-1]= 0.;	
+			// A[Nx-1] = Newton(4,f_outlet_R,Q[Nx-1],guess,par,maxIter, tol,h);
 			
 			// fluxes loop ---------------------------------------------------------------------------------
 			for (ix=1; ix<Nx; ix++){
