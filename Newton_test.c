@@ -55,7 +55,7 @@ double f_outlet_R(double A, double Q, double par[4])
 // 	return res; 
 // }
 
-double fp(double x, int n, double (*f)(double x, double Q, double par[n]), double Q,double par[n], double dx)
+double fp(double x, double (*f)(double x, double Q, double * par), double Q,double * par, double dx)
 {
 	double f0 = (*f)(x,Q,par);
 	double f1 = (*f)(x+dx,Q,par); 
@@ -66,8 +66,8 @@ double fp(double x, int n, double (*f)(double x, double Q, double par[n]), doubl
 
 }
 
-double Newton(int n,double(*f)(double A, double Q, double par[n]),
-			  double Q, double guess, double par[n],int maxIter,double tol,double dx)
+double Newton(double(*f)(double A, double Q, double * par),
+			  double Q, double guess, double * par,int maxIter,double tol,double dx)
 {
 
 	double xk = guess,xk1;
@@ -84,7 +84,7 @@ double Newton(int n,double(*f)(double A, double Q, double par[n]),
 			return xk;
 			}
 		
-		fpval= fp(xk,n,f,Q,par,dx);
+		fpval= fp(xk,f,Q,par,dx);
 		printf("fpval = %1f \n", fpval);
 		xk1 = xk - fval/fpval;
 		printf("xk1= %1f \n \n ",xk1);
@@ -118,23 +118,23 @@ int main(int argc, char *argv[])
 	double A,Q;
 	A = 1.05;
 	Q = 0.01;
-	// int size = 4.;
-	// double par[size];
-	// par[0] = 5.;
-	// par[1] = 1.;
-	// par[2] = 1333;
-	// par[3] = 0.;
+	int size = 4.;
+	double par[size];
+	par[0] = 5.;
+	par[1] = 1.;
+	par[2] = 1333;
+	par[3] = 0.;
 
 	// RC 
-	int size=7;
-	double par[size];
-	par[0] = 10;
-	par[1] = 0.01;
-	par[2] = 1e-5;
-	par[3] = A;
-	par[4] = 1.;
-	par[5] = 1333.;
-	par[6] = 0.;
+	// int size=7;
+	// double par[size];
+	// par[0] = 10;
+	// par[1] = 0.01;
+	// par[2] = 1e-5;
+	// par[3] = A;
+	// par[4] = 1.;
+	// par[5] = 1333.;
+	// par[6] = 0.;
 
 	// double (* f)(double * AQ, double * par);
 	// double (* fp)(double * AQ, double * par);
@@ -148,7 +148,7 @@ int main(int argc, char *argv[])
 	double tol = 1e-8;
 	double dx=1e-5;
 	int maxIter=10;
-	a= Newton(size,f_outlet_RC,Q,A,par,maxIter, tol,dx);
+	a= Newton(f_outlet_R,Q,A,par,maxIter, tol,dx);
 	
 	double b[1000];
 	int i;
