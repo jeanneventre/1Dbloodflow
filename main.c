@@ -4,7 +4,8 @@
 #include "fluxes.h"
 #include <sys/types.h>
 #include <sys/stat.h>
-#include "help.h"
+#include "help_math.h"
+#include "BC.h"
 
 int main(int argc, char *argv[])
 {
@@ -34,8 +35,8 @@ int main(int argc, char *argv[])
 	int N = round(1.2/dx);
 //----------------------------------------------------------------------------------------------------------			
     int result = mkdir("output", 0777);
- 	// FILE *fichierA =fopen("output/A_elastic1_amp0_0001.txt", "w");
-	// FILE *fichierQ =fopen("output/Q_Nx500.txt", "w");
+ 	FILE *fichierA =fopen("output/A_elastic1_amp0_0001.txt", "w");
+	FILE *fichierQ =fopen("output/Q_elastic1_amp0_0001.txt", "w");
 	// FILE *fichierQana =fopen("output/Qana.txt", "w");
 	// FILE *fichierC=fopen("output/C_NH_amp1.txt", "w");
 //----------------------------------------------------------------------------------------------------------	
@@ -52,9 +53,20 @@ int main(int argc, char *argv[])
 		Q[ix]=0.;
 		Qana[ix]=0.;
 	}
+//----------------------------------------------------------------------------------------------------------		
+	double par[4];
+	double guess = 1.5;
+	double maxIter=10;
+	double tol=1e-6;
+	double h=1e-3;
+
+	par[0] = 5000; // R
+	par[1] = 1.; // A0
+	par[2] = 1333; // K
+	par[3] = 0.; // Pout
 //----------------------------------------------------------------------------------------------------------	
 // saving loop 
-	for (j=0; j< 101; j++){
+	for (j=0; j< 1000; j++){
 		// time loop 
 		for (it=0; it<Nt;it++){
 
@@ -65,9 +77,10 @@ int main(int argc, char *argv[])
 			A[0]=A[1];
 			Q[0]=  amp *fmax(0,sin(2*3.1415*omega*t*(t<1))); //amp *sin(2*3.1415*omega*t);
 			// x=L : 
-			A[Nx-1]= A[Nx-2];
-			Q[Nx-1]= 0;	
-
+			// A[Nx-1]= A[Nx-2];
+			Q[Nx-1]= Q[Nx-2];	
+			A[Nx-1] = Newton(4,f_outlet_R,Q[Nx-1],guess,par,maxIter, tol,h);
+			
 			// fluxes loop ---------------------------------------------------------------------------------
 			for (ix=1; ix<Nx; ix++){
 				rusanov(A[ix-1],A[ix],Q[ix-1], Q[ix],&fa[ix],&fq[ix]);
@@ -86,15 +99,15 @@ int main(int argc, char *argv[])
  		}
 
  		// ecriture dans des fichiers texte ----------------------------------------------------------------
-	 	// for(ix=0;ix<Nx;ix++) {  
-	 		// fprintf(fichierA, "%1f %1f \n", ix*dx, A[ix]);
-	 		// fprintf(fichierQ, "%1f %1f \n", ix*dx, Q[ix]/amp);
+	 	for(ix=0;ix<Nx;ix++) {  
+	 		fprintf(fichierA, "%1f %1f \n", ix*dx, A[ix]);
+	 		fprintf(fichierQ, "%1f %1f \n", ix*dx, Q[ix]/amp);
 	 		// fprintf(fichierQana, "%1f %1f \n", ix*dx, Qana[ix]/amp);
       		// fprintf(fichierC, "%1f %1f \n",A[ix], c[ix]);
-        // }
+        }
  		// saut de 2 lignes pour gnuplot
-	    // fprintf(fichierA,"\n \n");
-		// fprintf(fichierQ,"\n \n");
+	    fprintf(fichierA,"\n \n");
+		fprintf(fichierQ,"\n \n");
 		// fprintf(fichierQana, "\n \n");
 		// fprintf(fichierC, "\n \n");
 
