@@ -9,18 +9,15 @@
 
 int main(int argc, char *argv[])
 {
+
 	int i,it,j,ix;
-
-	double L = 2.;
-	int Nx = 200;
-	double dx = L/Nx;
-
 	double t=0.;
 	double dt = 1e-5;
 	int Nt = 800;
 
-	double omega = 1.;
-	double amp =0.0001;
+	double L = 6.;
+	int Nx = 600;
+	double dx = L/Nx;
 
 	double A[Nx];
 	double Q[Nx];
@@ -29,22 +26,25 @@ int main(int argc, char *argv[])
 	double fa[Nx],fq[Nx];
 	double c[Nx];
 
+	double omega = 1.;
+	double amp = 0.1;
+
 	double integrale_ana = 0.;
 	double integrale_Q = 0.;	
 	double err;
 	int N = round(1.2/dx);
-//----------------------------------------------------------------------------------------------------------			
-    int result = mkdir("output", 0777);
- 	FILE *fichierA =fopen("output/A_elastic1_amp0_0001.txt", "w");
-	FILE *fichierQ =fopen("output/Q_elastic1_amp0_0001.txt", "w");
+//------ ----------------------------------------------------------------------------------------------------			
+ //    int result = mkdir("output", 0777);
+ 	FILE *fichierA =fopen("output/A_remp_Varga_P0_amp01.txt", "w");
+	FILE *fichierQ =fopen("output/Q_remp_Varga_P0_amp01.txt", "w");
 	// FILE *fichierQana =fopen("output/Qana.txt", "w");
 	// FILE *fichierC=fopen("output/C_NH_amp1.txt", "w");
 //----------------------------------------------------------------------------------------------------------	
 	// void kurganov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
-	void rusanov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
+	// void rusanov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov2 (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov_Varga (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
-	// void rusanov_Varga2(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
+	void rusanov_Varga2(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov_NeoHooke(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 //----------------------------------------------------------------------------------------------------------	
 	// initial conditions
@@ -75,7 +75,8 @@ int main(int argc, char *argv[])
 			// boundary conditions -------------------------------------------------------------------------
 			// x=0 :
 			A[0]=A[1];
-			Q[0]=  amp *fmax(0,sin(2*3.1415*omega*t*(t<1))); //amp *sin(2*3.1415*omega*t);
+			// Q[0]=  amp *fmax(0,sin(2*3.1415*omega*t*(t<1))); //amp *sin(2*3.1415*omega*t);
+			Q[0] = amp *fmax(1,sin(2*3.1415*omega*t*(t<1))*sin(2*3.1415*t*(t<1)));
 			// x=L : 
 			A[Nx-1]= A[Nx-2];
 			Q[Nx-1]= 0.;	
@@ -83,7 +84,7 @@ int main(int argc, char *argv[])
 			
 			// fluxes loop ---------------------------------------------------------------------------------
 			for (ix=1; ix<Nx; ix++){
-				rusanov(A[ix-1],A[ix],Q[ix-1], Q[ix],&fa[ix],&fq[ix]);
+				rusanov_Varga2(A[ix-1],A[ix],Q[ix-1], Q[ix],&fa[ix],&fq[ix]);
 			}
 			// resolution loop -----------------------------------------------------------------------------
 			for (ix=1; ix<Nx-1; ix++){
@@ -102,7 +103,7 @@ int main(int argc, char *argv[])
 	 	for(ix=0;ix<Nx;ix++) {  
 	 		fprintf(fichierA, "%1f %1f \n", ix*dx, A[ix]);
 	 		fprintf(fichierQ, "%1f %1f \n", ix*dx, Q[ix]/amp);
-	 		// fprintf(fichierQana, "%1f %1f \n", ix*dx, Qana[ix]/amp);
+	 	 	// fprintf(fichierQana, "%1f %1f \n", ix*dx, Qana[ix]/amp);
       		// fprintf(fichierC, "%1f %1f \n",A[ix], c[ix]);
         }
  		// saut de 2 lignes pour gnuplot
@@ -114,13 +115,32 @@ int main(int argc, char *argv[])
 	}	
 //----------------------------------------------------------------------------------------------------------	
 	// calcul de l'intégrale de Q, Qana...
-	for (i=1;i<N;i++){
-		integrale_ana+= integrale(Qana[i], Qana[i-1],amp,dx);
-	}
-	for (i=1;i<Nx;i++){
-		integrale_Q+= integrale(Q[i], Q[i-1], amp, dx);
- 	}
 
- 	err = integrale_ana - integrale_Q;
+	// double Somme;
+
+	// for (i=0;i<Nx;i++){
+	// 	Somme += (Q[i]-Qana[i])*(Q[i]-Qana[i]);
+	// }
+
+	// for (i=0;i<Nx;i++){
+	// 	err += integrale((Qana[i]-Q[i])*(Qana[i]-Q[i]),(Qana[i-1]-Q[i-1])*(Qana[i-1]-Q[i-1]),amp,dx);
+	// }
+
+	// printf("%1f %1F \n",dx,dx*sqrt(err));
+	// integrale_ana = 0.;
+	// for (i=1;i<N;i++){
+	// 	integrale_ana+= integrale(Qana[i]-Q[i],Qana[i-1]-Q[i-1],amp,dx);
+	// }
+	// integrale_Q = 0.;
+	// for (i=1;i<Nx;i++){
+	// 	integrale_Q+= integrale(Q[i], Q[i-1], amp, dx);
+ // 	}
+
+ 	// printf("integrale ana : %1F \n ", integrale_ana);
+ 	// printf("integrale Q : %1f \n",integrale_Q);
+ 	// err = 0.;
+ 	// err = -integrale_ana + integrale_Q;
+ 	// printf("erreur : %1f \n ", err);
+ 	// printf("%1d %1F \n",Nx, err);
 //----------------------------------------------------------------------------------------------------------	
 }
