@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
 	double dt = 1e-5;
 	int Nt = 800;
 
-	double L = 6.;
-	int Nx = 600;
+	double L = 16.;
+	int Nx = 1600;
 	double dx = L/Nx;
 
 	double A[Nx];
@@ -27,16 +27,16 @@ int main(int argc, char *argv[])
 	double c[Nx];
 
 	double omega = 1.;
-	double amp = 0.1;
+	double amp = 1.5;
 
 	double integrale_ana = 0.;
 	double integrale_Q = 0.;	
 	double err;
 	int N = round(1.2/dx);
 //------ ----------------------------------------------------------------------------------------------------			
- //    int result = mkdir("output", 0777);
- 	FILE *fichierA =fopen("output/A_remp_Varga_P0_amp01.txt", "w");
-	FILE *fichierQ =fopen("output/Q_remp_Varga_P0_amp01.txt", "w");
+    // int result = mkdir("output2", 0777);
+ 	FILE *fichierA =fopen("amplitude/A_long_NH_1_5.txt", "w");
+	FILE *fichierQ =fopen("amplitude/Q_long_NH_1_5.txt", "w");
 	// FILE *fichierQana =fopen("output/Qana.txt", "w");
 	// FILE *fichierC=fopen("output/C_NH_amp1.txt", "w");
 //----------------------------------------------------------------------------------------------------------	
@@ -44,8 +44,8 @@ int main(int argc, char *argv[])
 	// void rusanov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov2 (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov_Varga (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
-	void rusanov_Varga2(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
-	// void rusanov_NeoHooke(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
+	// void rusanov_Varga2(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
+	void rusanov_NeoHooke(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 //----------------------------------------------------------------------------------------------------------	
 	// initial conditions
 	for(ix=0; ix<Nx; ix++){
@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 	par[3] = 0.; // Pout
 //----------------------------------------------------------------------------------------------------------	
 // saving loop 
-	for (j=0; j< 1000; j++){
+	for (j=0; j< 2000; j++){
 		// time loop 
 		for (it=0; it<Nt;it++){
 
@@ -75,8 +75,8 @@ int main(int argc, char *argv[])
 			// boundary conditions -------------------------------------------------------------------------
 			// x=0 :
 			A[0]=A[1];
-			// Q[0]=  amp *fmax(0,sin(2*3.1415*omega*t*(t<1))); //amp *sin(2*3.1415*omega*t);
-			Q[0] = amp *fmax(1,sin(2*3.1415*omega*t*(t<1))*sin(2*3.1415*t*(t<1)));
+			Q[0]=  amp *fmax(0,sin(2*3.1415*omega*t*(t<1))); //amp *sin(2*3.1415*omega*t);
+			// Q[0] = amp *fmax(1,sin(2*3.1415*omega*t*(t<1))*sin(2*3.1415*t*(t<1)));
 			// x=L : 
 			A[Nx-1]= A[Nx-2];
 			Q[Nx-1]= 0.;	
@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
 			
 			// fluxes loop ---------------------------------------------------------------------------------
 			for (ix=1; ix<Nx; ix++){
-				rusanov_Varga2(A[ix-1],A[ix],Q[ix-1], Q[ix],&fa[ix],&fq[ix]);
+				rusanov_NeoHooke(A[ix-1],A[ix],Q[ix-1], Q[ix],&fa[ix],&fq[ix]);
 			}
 			// resolution loop -----------------------------------------------------------------------------
 			for (ix=1; ix<Nx-1; ix++){
