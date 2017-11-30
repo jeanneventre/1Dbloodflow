@@ -3,6 +3,7 @@ import numpy as np
 import math
 # import matplotlib.pyplot as plt
 from pylab import *
+import matplotlib
 from mpl_toolkits.mplot3d import Axes3D
 import pickle
 
@@ -54,27 +55,37 @@ x,y = np.meshgrid(x,y)
 x=np.transpose(x)
 y=np.transpose(y)
 
-Vmag0 = data[10][0][40]
-Vmag1 = data[10][1][40]
-Vmag2 = data[10][2][40]
-
 mag= np.zeros((128,224))
 
-# datamin = 0.
-# datamax = 6220.03416389
+# line, = plt.plot(y,mag)
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
+for t in range(0,20):
+	Vmag0 = data[t][0][40]
+	Vmag1 = data[t][1][40]
+	Vmag2 = data[t][2][40]
 
-for i in range(0,128):
-	for j in range(0,224):
-		mag[i,j] = math.sqrt(Vmag0[i,j]**2 + Vmag1[i,j]**2 + Vmag2[i,j]**2)
-# 		# datamin = np.min(mag)
-# 		# datamax = np.max(mag)
-		# col = ax.scatter(i,j,mag[i,j], color='r', marker='o')
+	for i in range(35,100):
+		for j in range(45,180):
+			if (i>0 and i<55 and j>170 and j<224) or (i<45 and j<57):
+				mag[i,j] = 0.
+			else :
+				mag[i,j] = math.sqrt(Vmag0[i,j]**2 + Vmag1[i,j]**2 + Vmag2[i,j]**2)
+	# 		# datamin = np.min(mag)
+	# 		# datamax = np.max(mag)
+			# col = ax.scatter(i,j,mag[i,j], color='r', marker='o')
 
-surf = ax.plot_surface(x,y,mag,rstride=1,cstride=1,cmap=cm.coolwarm,linewidth=0,antialiased=False)
-fig.colorbar(surf, shrink=0.5, aspect=5)
-
+	surf = ax.plot_surface(x,y,mag,rstride=1,cstride=1,cmap=cm.coolwarm,linewidth=0,antialiased=False)
+	# fig.colorbar(surf, shrink=0.5, aspect=5)
+	draw()
+	pause(0.5)
+	plt.figure(2)
+	y = np.linspace(0,224,224)	
+	plt.plot(y,mag[64,:])
+	draw()
+	pause(0.5)
+	clf()
+# matplotlib.animation.Animation.save('movie.mp4')
 show()
 
