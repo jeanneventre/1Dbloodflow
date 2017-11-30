@@ -1,13 +1,14 @@
 #example.py
-import numpy
+import numpy as np
 import math
 # import matplotlib.pyplot as plt
 from pylab import *
 from mpl_toolkits.mplot3d import Axes3D
+import pickle
 
-data = numpy.load("velocity-download-595f881f278f6a562e020a3d-678dd80d2456e8ab.npy")
-print("data shape: ", data.shape)
-# data shape: (20, 3, 100, 152, 256)
+data = np.load("velocity-download-595f881f278f6a562e020a3d-678dd80d2456e8ab.npy")
+# print("data shape: ", data.shape)
+# data shape: (20, 3, 160, 128, 224)
 # Data has 20 time points each of which is a volume of 100 slices.
 # Each slice has 152 rows and 256 columns
 #
@@ -22,42 +23,58 @@ print("data shape: ", data.shape)
 #
 # RL component of velocity at the first time point for all pixels
 v_rl_0 = data[0][0]
-print ("v_rl_0 shape: ", v_rl_0.shape)
-#v_rl_0 shape:  (100, 152, 256)
+# print ("v_rl_0 shape: ", v_rl_0.shape)
+#v_rl_0 shape:  (160, 128, 224)
 
 # AP component of velocity at the first time point for all pixels
 v_ap_0 = data[0][1]
-print ("v_ap_0 shape: ", v_rl_0.shape)
-#v_ap_0 shape:  (100, 152, 256)
+# print ("v_ap_0 shape: ", v_rl_0.shape)
+#v_ap_0 shape:  (160, 128, 224)
 
 # IS component of velocity at the first time point for all pixels
 v_is_0 = data[0][2]
-print ("v_is_0 shape: ", v_rl_0.shape)
-#v_is_0 shape:  (100, 152, 256)
-#
+# print ("v_is_0 shape: ", v_rl_0.shape)
+#v_is_0 shape:  (160, 128, 224)
+
 # velocity at pixel location (20, 30, 40) at the last time point
-v = numpy.zeros(3)
-print ("v shape: ", v.shape)
+v = np.zeros(3)
+# print ("v shape: ", v.shape)
 v[0] = data[19][0][40][30][20]
 v[1] = data[19][1][40][30][20]
 v[2] = data[19][2][40][30][20]
-print ("v = ", v)
+# print ("v = ", v)
 # magnitude of v
-print( "v magnitude (speed): ", math.sqrt(v.dot(v)))
+# print( "v magnitude (speed): ", math.sqrt(v.dot(v)))
 
-# fig = plt.figure()
-# ax = fig.gca(projection='3d')
+x = np.linspace(0,128,128)
+y = np.linspace(0,224,224)
 
+x,y = np.meshgrid(x,y)
 
-# ax.scatter(v[0],v[1],v[2],c='r', marker= 'o')		
-# draw()
-# pause(0.1)
+x=np.transpose(x)
+y=np.transpose(y)
 
+Vmag0 = data[10][0][40]
+Vmag1 = data[10][1][40]
+Vmag2 = data[10][2][40]
 
-# ax = fig.add_subplot(111, projection='3d')
-# ax.scatter(v[0],v[1],v[2],c='r', marker= 'o')
-# ax.plot_trisurf(U,V,W,cmap=cm.coolwarm, linewidth=0, antialiased=False)
-# Axes3D.scatter(data[10,0,:,10,10], data[10,1,:,10,10], data[10,2,:,10,10], zdir='z', s=20, c=None, depthshade=True, *args=None,**kwargs=None)
+mag= np.zeros((128,224))
 
+# datamin = 0.
+# datamax = 6220.03416389
 
-# show()
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+for i in range(0,128):
+	for j in range(0,224):
+		mag[i,j] = math.sqrt(Vmag0[i,j]**2 + Vmag1[i,j]**2 + Vmag2[i,j]**2)
+# 		# datamin = np.min(mag)
+# 		# datamax = np.max(mag)
+		# col = ax.scatter(i,j,mag[i,j], color='r', marker='o')
+
+surf = ax.plot_surface(x,y,mag,rstride=1,cstride=1,cmap=cm.coolwarm,linewidth=0,antialiased=False)
+fig.colorbar(surf, shrink=0.5, aspect=5)
+
+show()
+
