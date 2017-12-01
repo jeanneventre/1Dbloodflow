@@ -28,7 +28,7 @@ void rusanov2 (double Am, double Ap, double Qm, double Qp, double *fa, double *f
  	double e3 = 2./3. *e1;
 
 	*fa = (Qm + Qp)/2. - a * (Ap - Am)/2.;
-	*fq = (sq(Qm)/Am + e3*pow(Am, 3./2.) + sq(Qp)/Ap + e3*pow(Ap, 3./2.) )/2. - a * (Qp - Qm)/2.;
+	*fq = (sq(Qm)/Am + e3*Am*sqrt(Am) + sq(Qp)/Ap + e3*Ap*sqrt(Ap))/2. - a * (Qp - Qm)/2.;
 }
 
 void rusanov_Varga (double Am, double Ap, double Qm, double Qp, double *fa, double *fq)

@@ -16,3 +16,24 @@ double PtoA(double P, double A0, double K)
 	return sq(P/K + sqrt(A0));
 }
 
+double Pt(double rho, double K, double A0, double A, double Q)
+{
+	// total pressure for point junction
+	return 1./2. * rho * sq(Q/A) + AtoP(A,A0,K);
+}
+
+double cmk(double rho, double K, double A)
+{
+	// Moens-Korteweg velocity
+	return sqrt(K/(2.*rho) * sqrt(A));
+}
+
+double W1(double rho, double K, double A, double Q)
+{
+	return Q/A + 4. * cmk(rho,K,A);
+}
+
+double W2(double rho, double K, double A, double Q)
+{
+	return Q/A - 4. * cmk(rho,K,A); 
+}

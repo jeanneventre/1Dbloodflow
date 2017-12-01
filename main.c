@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	double c[Nx];
 
 	double omega = 1.;
-	double amp = 1.5;
+	double amp = 2.;
 
 	double integrale_ana = 0.;
 	double integrale_Q = 0.;	
@@ -35,8 +35,8 @@ int main(int argc, char *argv[])
 	int N = round(1.2/dx);
 //------ ----------------------------------------------------------------------------------------------------			
     // int result = mkdir("output2", 0777);
- 	FILE *fichierA =fopen("amplitude/A_long_NH_1_5.txt", "w");
-	FILE *fichierQ =fopen("amplitude/Q_long_NH_1_5.txt", "w");
+ 	FILE *fichierA =fopen("amplitude/A_long_Varga_2.txt", "w");
+	FILE *fichierQ =fopen("amplitude/Q_long_Varga_2.txt", "w");
 	// FILE *fichierQana =fopen("output/Qana.txt", "w");
 	// FILE *fichierC=fopen("output/C_NH_amp1.txt", "w");
 //----------------------------------------------------------------------------------------------------------	
@@ -44,8 +44,8 @@ int main(int argc, char *argv[])
 	// void rusanov (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov2 (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 	// void rusanov_Varga (double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
-	// void rusanov_Varga2(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
-	void rusanov_NeoHooke(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
+	void rusanov_Varga2(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
+	// void rusanov_NeoHooke(double Am, double Ap, double Qm, double Qp,double * fa, double * fq);
 //----------------------------------------------------------------------------------------------------------	
 	// initial conditions
 	for(ix=0; ix<Nx; ix++){
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 			// x=0 :
 			A[0]=A[1];
 			Q[0]=  amp *fmax(0,sin(2*3.1415*omega*t*(t<1))); //amp *sin(2*3.1415*omega*t);
-			// Q[0] = amp *fmax(1,sin(2*3.1415*omega*t*(t<1))*sin(2*3.1415*t*(t<1)));
+			// Q[0] = amp *fmax(1,sin(2*3.1415*omega*t*(t<1))*sin(2*3.1ccccccccccxwwwwwwwww415*t*(t<1)));
 			// x=L : 
 			A[Nx-1]= A[Nx-2];
 			Q[Nx-1]= 0.;	
@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
 			
 			// fluxes loop ---------------------------------------------------------------------------------
 			for (ix=1; ix<Nx; ix++){
-				rusanov_NeoHooke(A[ix-1],A[ix],Q[ix-1], Q[ix],&fa[ix],&fq[ix]);
+				rusanov_Varga2(A[ix-1],A[ix],Q[ix-1], Q[ix],&fa[ix],&fq[ix]);
 			}
 			// resolution loop -----------------------------------------------------------------------------
 			for (ix=1; ix<Nx-1; ix++){
@@ -111,36 +111,20 @@ int main(int argc, char *argv[])
 		fprintf(fichierQ,"\n \n");
 		// fprintf(fichierQana, "\n \n");
 		// fprintf(fichierC, "\n \n");
-
 	}	
 //----------------------------------------------------------------------------------------------------------	
 	// calcul de l'intégrale de Q, Qana...
 
-	// double Somme;
+	double Somme;
 
-	// for (i=0;i<Nx;i++){
-	// 	Somme += (Q[i]-Qana[i])*(Q[i]-Qana[i]);
-	// }
+	for (i=0;i<Nx;i++){
+		Somme += (Q[i]-Qana[i])*(Q[i]-Qana[i]);
+	}
 
-	// for (i=0;i<Nx;i++){
-	// 	err += integrale((Qana[i]-Q[i])*(Qana[i]-Q[i]),(Qana[i-1]-Q[i-1])*(Qana[i-1]-Q[i-1]),amp,dx);
-	// }
+	for (i=0;i<Nx;i++){
+		err += integrale((Qana[i]-Q[i])*(Qana[i]-Q[i]),(Qana[i-1]-Q[i-1])*(Qana[i-1]-Q[i-1]),amp,dx);
+	}
 
 	// printf("%1f %1F \n",dx,dx*sqrt(err));
-	// integrale_ana = 0.;
-	// for (i=1;i<N;i++){
-	// 	integrale_ana+= integrale(Qana[i]-Q[i],Qana[i-1]-Q[i-1],amp,dx);
-	// }
-	// integrale_Q = 0.;
-	// for (i=1;i<Nx;i++){
-	// 	integrale_Q+= integrale(Q[i], Q[i-1], amp, dx);
- // 	}
-
- 	// printf("integrale ana : %1F \n ", integrale_ana);
- 	// printf("integrale Q : %1f \n",integrale_Q);
- 	// err = 0.;
- 	// err = -integrale_ana + integrale_Q;
- 	// printf("erreur : %1f \n ", err);
- 	// printf("%1d %1F \n",Nx, err);
 //----------------------------------------------------------------------------------------------------------	
 }
