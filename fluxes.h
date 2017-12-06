@@ -99,6 +99,18 @@ void rusanov_NeoHooke (double Am, double Ap, double Qm, double Qp, double * fa, 
 
 // }
 
+void Bryant (double Am, double Ap, double Qm, double Qp, double * fa, double * fq)
+{
+	double um = Qm/Am;
+	double up = Qp/Ap;
+	double cp = sqrt(2.*e1 * Ap - 6.*e1 /(Ap*Ap) + 6.*e1/(Ap*Ap*Ap));
+	double cm = sqrt(2.*e1 * Am - 6.*e1 /(Am*Am) + 6.*e1/(Am*Am*Am));
+	double a = fmax(fabs(cp), fabs(cm));
+
+	*fa = (Qm + Qp)/2. - a * (Ap - Am)/2.;
+	*fq = (sq(Qm)/Am + e1*sq(Am) + 6.*e1/Am - 3.*e1/sq(Am) + sq(Qp)/Ap + e1*sq(Ap) + 6.*e1/Ap - 3.*e1/sq(Ap))/2. - a * (Qp-Qm)/2.;
+}
+
 void kurganov (double Am, double Ap, double Qm, double Qp, double * fa, double * fq)
 {
 
