@@ -6,10 +6,10 @@ export folderGeneral=/Documents/Boulot/Thèse/code//bloodflow/bloodflow/Examples
 
 for NN in "Newtonian" ; do
   for conj in "jS" ; do
-    for nuv in "5e4"  ; do # "1e4" "3e4" "5e4"
-      for E in 0.6e7 ;do # 0.4e6 0.4e7 1e7 1.6e7 0.7e7 0.8e7 0.9e7 1e7
-        for Rt in 0.4; do #0 0.8 1  0.2 0.3  0.5 0.6 0.7
-          for Nx in 5 ; do #5 7 
+    for nuv in "5e4" ; do # "1e4" "3e4" "5e4" "6e4" 
+      for E in 0.4e7   ;do # 0.6e7 0.8e7 0.9e7 1e7 0.7e7
+        for Rt in 0.6  ; do #0 0.8 1  0.5 0.7 0.8  0.2 0.3 0.4
+          for Nx in 5 ; do #3 7   
             for xOrder in 2 ; do
               for dt in 1e-4 ; do
                 for tOrder in 2 ; do

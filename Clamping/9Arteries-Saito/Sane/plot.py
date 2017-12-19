@@ -20,6 +20,7 @@ import csv
 
 from scipy.interpolate import interp1d
 
+from sklearn import metrics
 import matplotlib.pyplot as plt
 
 def main(argv) :
@@ -59,7 +60,7 @@ def main(argv) :
     # ---- PATIENT DATA
     t = np.linspace(0,0.57,num=58) 
 
-    Q = np.array([64.90,65.11, 66.11,  67.96,   70.70,   74.74,  79.48,  84.69,   89.68,  94.34,   98.26,   101.64,   104.42,   106.83,108.81,
+    Pexp = np.array([64.90,65.11, 66.11,  67.96,   70.70,   74.74,  79.48,  84.69,   89.68,  94.34,   98.26,   101.64,   104.42,   106.83,108.81,
     110.14,110.91,   111.09,    110.80,    109.90,    108.72,    107.52,    106.09,    104.51,    102.51,    100.20,97.44,    94.54,    91.50,    
     88.64,86.00,    83.69,    81.63,   79.91,    78.40,    77.17,   76.06,   75.23,   74.44,   73.83,   73.23,   72.63,   72.01,   71.47,   71.01,
     70.49,69.99,  69.52,   69.03,  68.58,   68.12,    67.70,    67.17,    66.70,    66.18,    65.71,    65.25,    64.88])
@@ -95,7 +96,7 @@ def main(argv) :
             Data[:,0] = Data[:,0] - Data[70,0]  
     # -----------------------------------------------------
     # ---- CALCULATIONS
-    b = sp.integrate.trapz(Q, axis=0, dx=0.01)  
+    b = sp.integrate.trapz(Pexp, axis=0, dx=0.01)  
 
     D  = np.zeros(115)
     tt = np.zeros(115)
@@ -105,8 +106,11 @@ def main(argv) :
         D[i] = Data[int(k),3]
         tt[i] = Data[int(k),0]
 
-    R2 = np.sum((D[8:66] - np.mean(Q))**2)/ np.sum((Q - np.mean(Q))**2) 
-    print(R2)
+    # R2 = np.sum((D[8:66] - np.mean(Q))**2)/ np.sum((Q - np.mean(Q))**2) 
+    R2   = metrics.r2_score(Pexp, D[8:66], multioutput ='uniform_average')
+    Linf = max(abs(Pexp-D[8:66]))/max(abs(Pexp))
+    L1   = sp.integrate.trapz(abs(Pexp-D[8:66]), dx = 0.01)/sp.integrate.trapz(abs(Pexp), dx=0.01) 
+    L2   = np.sqrt(sp.integrate.trapz((Pexp-D[8:66])**2, dx=0.01))/np.sqrt(sp.integrate.trapz(Pexp**2,dx=0.01))
     # -----------------------------------------------------
     # ---- WRITE RESULTS IN FILES 
     os.chdir(HOME)
@@ -114,19 +118,20 @@ def main(argv) :
     os.chdir(integ)
     fileName = 'res.csv' 
 
-    if (float(nuv) == 5e4) and (float(E) == 0.6e7) and(float(Rt) == 0.4):
+    if (float(nuv) == 5e4) and (float(E) == 0.4e7) and(float(Rt) == 0.5):
         os.remove(fileName)
         # fh = open(fileName, 'w')
         # fh.write(" nuv, \t E, \t Rt, \t a,\t b, \t (a-b) \t \n")
 
     fh = open(fileName, 'a')
-    fh.write("%.20f, \t %20f, \t %.20f, \t %.20f, \t %.20f, \t %.20f, \t %.20f"%(float(nuv),float(E),float(Rt),a,b,abs(a-b), R2) + "\n")
-
+    fh.write("%.20f, \t %20f, \t %.20f, \t %.20f, \t %.20f, \t %.20f,  \t %.20f"%(float(nuv),float(E),float(Rt), R2, Linf, L1,L2) + "\n")
+    # -----------------------------------------------------
+    # ---- PLOT RESULTS
     # plt.plot(Data[:,0], Data[:,3])
-    plt.plot(t,Q)
-    plt.plot(tt[8:66],D[8:66])
-    plt.xlim([-0.1,2*0.57])
-
+    plt.plot(t,Pexp,label='Experimental')
+    plt.plot(tt[8:66],D[8:66],label='Simulated')
+    # plt.xlim([-0.1,2*0.57])
+    plt.legend()
     plt.show()
 if __name__ == "__main__":
 	main(sys.argv[1:])

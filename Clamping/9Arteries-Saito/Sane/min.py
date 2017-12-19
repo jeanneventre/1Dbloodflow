@@ -37,15 +37,22 @@ def main(argv) :
 
 	os.chdir(HOME)
 	liX.append(0)
-	liY.append([1,2,3,4,5])
+	liY.append([1,2,3,4,5,6,7,8,9])
 	lFileSep.append(",")
-	lFile.append( PATHs + State + "integrale.csv")
+	lFile.append( PATHs + State + "res.csv")
 	nplot = len(lFile)
 	for j in range(0,nplot):	
 		Data = np.genfromtxt(lFile[j], delimiter =  str(lFileSep[j]))
 
-	a = min(Data[:,5])
-	print(a)
-
+	a = min(Data[:,3])
+	b = min(Data[:,4])
+	c = min(Data[:,5])
+	d = min(Data[:,6])
+	
+	print('R2 : ', a)
+	print('Linf :', b)
+	print('L1 : ', c)
+	print('L2 : ', d)
+	
 if __name__ == "__main__":
 	main(sys.argv[1:])
