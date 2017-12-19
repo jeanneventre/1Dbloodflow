@@ -1,0 +1,266 @@
+
+
+*******************************************************************************
+Fri Dec 15 15:47:58 2017
+
+
+FIT:    data read from 'Artery_0_t_Q.csv' us 1:2
+	x range restricted to [5.87714 : 5.93025]
+	y range restricted to [294.917 : 449.127]
+        #datapoints = 30
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+
+
+*******************************************************************************
+Fri Dec 15 15:48:12 2017
+
+
+FIT:    data read from 'Artery_0_t_Q.csv' us 1:2
+	x range restricted to [5.87714 : 5.93025]
+	y range restricted to [294.917 : 449.127]
+        #datapoints = 30
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 4.14296e+06       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.745352
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+c               = 1
+d               = 1
+e               = 1
+f               = 1
+g               = 1
+h               = 1
+i               = 1
+
+After 2715 iterations the fit converged.
+final sum of squares of residuals : 29674.9
+rel. change during last iteration : -9.88867e-06
+
+degrees of freedom    (FIT_NDF)                        : 21
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 37.5911
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1413.09
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 107.735          +/- 5.217e+12    (4.842e+12%)
+b               = 33.6792          +/- 7.92e+12     (2.352e+13%)
+c               = -75.9052         +/- 4.167e+10    (5.49e+10%)
+d               = -100.996         +/- 3.332e+12    (3.299e+12%)
+e               = 38.1019          +/- 6.708e+09    (1.761e+10%)
+f               = 100.372          +/- 6.085e+11    (6.062e+11%)
+g               = 51.651           +/- 1.86e+09     (3.602e+09%)
+h               = 37.809           +/- 1.408e+09    (3.723e+09%)
+i               = 115.428          +/- 4.304e+07    (3.729e+07%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      c      d      e      f      g      h      i      
+a               1.000 
+b              -1.000  1.000 
+c               0.996 -0.996  1.000 
+d              -1.000  1.000 -0.995  1.000 
+e              -0.988  0.987 -0.998  0.986  1.000 
+f              -1.000  1.000 -0.994  1.000  0.985  1.000 
+g               0.988 -0.987  0.998 -0.986 -1.000 -0.985  1.000 
+h               0.991 -0.991  0.975 -0.992 -0.958 -0.993  0.958  1.000 
+i              -0.995  0.994 -1.000  0.994  0.999  0.993 -0.999 -0.972  1.000 
+
+
+*******************************************************************************
+Fri Dec 15 15:49:44 2017
+
+
+FIT:    data read from 'Artery_0_t_Q.csv' us 1:2
+	x range restricted to [5.60000 : 6.58462]
+	y range restricted to [-288.813 : 851.135]
+        #datapoints = 1141
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 1.09341e+08       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 13.7671
+
+initial set of free parameter values
+
+a               = 107.735
+b               = 33.6792
+c               = -75.9052
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 4.97756e+07
+rel. change during last iteration : -1.0825e-07
+
+degrees of freedom    (FIT_NDF)                        : 1138
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 209.14
+variance of residuals (reduced chisquare) = WSSR/ndf   : 43739.5
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 217.534          +/- 6.191        (2.846%)
+b               = 299.514          +/- 8.763        (2.926%)
+c               = -68.6035         +/- 0.02925      (0.04264%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      c      
+a               1.000 
+b              -0.001  1.000 
+c              -0.001 -0.035  1.000 
+
+
+*******************************************************************************
+Fri Dec 15 15:50:13 2017
+
+
+FIT:    data read from 'Artery_0_t_Q.csv' us 1:2
+	x range restricted to [5.60000 : 6.58462]
+	y range restricted to [-288.813 : 851.135]
+        #datapoints = 1141
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+BREAK:          no parameter specified
+
+
+
+*******************************************************************************
+Fri Dec 15 15:50:15 2017
+
+
+FIT:    data read from 'Artery_0_t_Q.csv' us 1:2
+	x range restricted to [5.60000 : 6.58462]
+	y range restricted to [-288.813 : 851.135]
+        #datapoints = 1141
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 4.07756e+07       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 99.9639
+
+initial set of free parameter values
+
+a               = 217.534
+b               = 299.514
+c               = -68.6035
+d               = -100.996
+e               = 38.1019
+
+After 32 iterations the fit converged.
+final sum of squares of residuals : 1.10802e+06
+rel. change during last iteration : -9.4438e-07
+
+degrees of freedom    (FIT_NDF)                        : 1136
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 31.231
+variance of residuals (reduced chisquare) = WSSR/ndf   : 975.373
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 217.789          +/- 0.9246       (0.4245%)
+b               = 299.766          +/- 1.309        (0.4366%)
+c               = -68.6021         +/- 0.004364     (0.006362%)
+d               = -291.947         +/- 1.307        (0.4478%)
+e               = 39.217           +/- 0.004482     (0.01143%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      c      d      e      
+a               1.000 
+b              -0.001  1.000 
+c              -0.001 -0.035  1.000 
+d              -0.001 -0.001 -0.002  1.000 
+e               0.000  0.000  0.000 -0.020  1.000 
+
+
+*******************************************************************************
+Fri Dec 15 15:51:04 2017
+
+
+FIT:    data read from 'Artery_0_t_Q.csv' us 1:2
+	x range restricted to [5.60000 : 6.58462]
+	y range restricted to [-288.813 : 851.135]
+        #datapoints = 1141
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 9.3049e+06        delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 114.98
+
+initial set of free parameter values
+
+a               = 217.789
+b               = 299.766
+c               = -68.6021
+d               = -291.947
+e               = 39.217
+f               = 100.372
+g               = 51.651
+
+After 15 iterations the fit converged.
+final sum of squares of residuals : 80097.3
+rel. change during last iteration : -1.21696e-06
+
+degrees of freedom    (FIT_NDF)                        : 1134
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 8.40432
+variance of residuals (reduced chisquare) = WSSR/ndf   : 70.6325
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 217.801          +/- 0.2488       (0.1142%)
+b               = 299.778          +/- 0.3522       (0.1175%)
+c               = -68.602          +/- 0.001174     (0.001712%)
+d               = -291.923         +/- 0.3518       (0.1205%)
+e               = 39.217           +/- 0.001206     (0.003076%)
+f               = 42.4621          +/- 0.3521       (0.8292%)
+g               = 53.7485          +/- 0.008288     (0.01542%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      c      d      e      f      g      
+a               1.000 
+b              -0.001  1.000 
+c              -0.001 -0.035  1.000 
+d              -0.001 -0.001 -0.002  1.000 
+e               0.000  0.000  0.000 -0.020  1.000 
+f               0.000  0.000  0.001  0.001 -0.000  1.000 
+g               0.001  0.001  0.001  0.002 -0.000  0.026  1.000 
