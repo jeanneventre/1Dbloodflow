@@ -17,10 +17,12 @@ from help_Network   import *
 
 import  help_Output as out
 import csv
+# from    csv_libPlot import *
 
 from scipy.interpolate import interp1d
 
 from sklearn import metrics
+import pathlib
 import matplotlib.pyplot as plt
 
 def main(argv) :
@@ -30,9 +32,14 @@ def main(argv) :
     hd = header()
     hd.headerInput(argv) ; 
 
+    # LINUX
     HOME    = "/home/ventre/"
     PATH1D  = "Documents/Boulot/Thèse/code/bloodflow/bloodflow/Examples/Clamping/9Arteries-Saito/"
     PATHs   = "Documents/Boulot/Thèse/code/bloodflow/bloodflow/scripts/Clamping/9Arteries-Saito/"
+    # # MAC 
+    # HOME    = "/Users/jeanneventre/"
+    # PATH1D  = "Documents/Boulot/Thèse/code/bloodflow/Examples/Clamping/9Arteries-Saito/"
+    # PATHs   = "Documents/Boulot/Thèse/code/bloodflow/scripts/Clamping/9Arteries-Saito/"
 
     Nx       = hd.Nxstr
 
@@ -55,7 +62,7 @@ def main(argv) :
     State = "Sane"
 
     PATH    = PATH1D + State + "/" + NN + "/" + Conj + "/nuv=" + nuv + "/E=" + E + "/Rt=" + Rt + "/Nx=" + Nx + "/xOrder=" + xOrder + "/dt=" + dt + "/tOrder=" + tOrder + "/" + Solver + "/" + HR + "/"
-    Store   = PATH1D + "Figures"
+    Store   = PATH1D + State + "Figures"
     # -----------------------------------------------------
     # ---- PATIENT DATA
     t = np.linspace(0,0.57,num=58) 
@@ -118,7 +125,7 @@ def main(argv) :
     os.chdir(integ)
     fileName = 'res.csv' 
 
-    if (float(nuv) == 5e4) and (float(E) == 0.4e7) and(float(Rt) == 0.5):
+    if (float(nuv) == 5e4) and (float(E) == 0.25e7) and(float(Rt) == 0.4):
         os.remove(fileName)
         # fh = open(fileName, 'w')
         # fh.write(" nuv, \t E, \t Rt, \t a,\t b, \t (a-b) \t \n")
@@ -127,11 +134,120 @@ def main(argv) :
     fh.write("%.20f, \t %20f, \t %.20f, \t %.20f, \t %.20f, \t %.20f,  \t %.20f"%(float(nuv),float(E),float(Rt), R2, Linf, L1,L2) + "\n")
     # -----------------------------------------------------
     # ---- PLOT RESULTS
-    # plt.plot(Data[:,0], Data[:,3])
-    plt.plot(t,Pexp,label='Experimental')
-    plt.plot(tt[8:66],D[8:66],label='Simulated')
+    
+    # # TEST PLOT
+    ax = plt.gca()
+    ax.yaxis.set_tick_params(labelsize=12)
+    ax.xaxis.set_tick_params(labelsize=12)
+
+    plt.plot(t,Pexp,linewidth= 2, label='Experimental')
+    plt.plot(tt[8:66],D[8:66],linewidth=2,label='Simulated')
+    # plt.plot(Data[:,0], Data[:,3], label = 'Simulated')
     # plt.xlim([-0.1,2*0.57])
-    plt.legend()
+    plt.xlabel('time (s)', fontsize=12)
+    plt.ylabel('pressure (mmHg)',fontsize=12)
+    plt.text(0.4,95, "E = %d \n Rt = %.1f "%(float(E),float(Rt)), fontsize=14)
+    plt.legend(fontsize=12)
+    plt.title('Pre Clamp pressure in the right radial artery',fontsize=14)
     plt.show()
+    # # 
+
+    # pathlib.Path(Store).mkdir(parents=True, exist_ok=True) 
+    # os.chdir(HOME)
+    # for pType in ["P"] :
+
+    #     pName,pLabel = out.getType(pType)
+
+    #     # FILE :
+    #     ###########
+    #     # PATHEND     = "/dt=" + dtstr + "/tOrder=" + tOrderstr + "/KIN_HAT" + "/" + HRstr + "/Figures/" + ArtName0 + pName
+
+    #     i=1
+    #     PATHEND = PATH + "Figures/" + "Artery_" + str(round(i)) + "_t_"  + pName 
+
+    #     J1 = "100"
+    #     Art0_11  = PATHEND
+    #     ######################################
+    #     nfig = 1
+
+    #     lCol = [    "black"]
+    #     lMark = [   "o"]
+    #     lMarkSize = [   5]
+    #     lMarkWidth = [  1]
+    #     MarkPoints = 100
+
+    #     lLineSize = [   2]
+    #     lStyle = [      ""]
+    #     lAlpha = [  1]
+
+    #     LegLoc      = 1
+    #     LegPos      = [1., 1.]
+    #     LegCol      = 1
+    #     LegSize     = 19
+
+    #     xRange      = []
+    #     yRange      = [] 
+    #     xMargin = 0 
+    #     yMargin = 0
+
+    #     xBins       = 2 ;
+    #     yBins       = 2 ;
+
+    #     lHline      = []
+    #     lHlineColor = []
+    #     lHlineWidth = []
+    #     lHlineStyle = []
+
+    #     lVline      = []
+    #     lVlineColor = []
+    #     lVlineWidth = []
+    #     lVlineStyle = []
+        
+    #     lAffline = []
+    #     lAfflineColor = []
+    #     lAfflineWidth = []
+    #     lAfflineStyle = []
+
+    #     xScale = 10.
+    #     lXScale     = [ xScale]
+    #     yScale      = 1.
+    #     lYScale     = [ yScale]
+    #     pScale      = "linear"
+
+    #     xOffset     = xScale/2.
+    #     lXOffset    = [ xOffset]
+    #     lYOffset    = [ 0.]
+
+    #     lText       = []
+    #     lTextAlign  = [ "left"]
+    #     lTextPos    = [ [0.02,0.05]]
+    #     lTextColor  = [ "black" ]
+
+    #     xLabel=r"$x/L$"
+    #     yLabel = pLabel
+    #     lLabel = [""]
+
+    #     lFileSep    = [ ","]
+    #     liX         = [ 0]
+    #     liY         = [ 1]
+
+    #     lFile       = [ Art0_11
+    #                     ]
+    #     title = pType + "-t.pdf"
+    #     nfig = plot_csv_adim(pathStore=Store,title=title,lFile=lFile,lFileSep=lFileSep,
+    #                         liX=liX,liY=liY,
+    #                         xLabel=xLabel,yLabel=yLabel,lLabel=lLabel,
+    #                         xRange=xRange,yRange=yRange,xMargin=xMargin,yMargin=yMargin,
+    #                         xBins=xBins,yBins=yBins,
+    #                         lHline=lHline,lHlineColor=lHlineColor,lHlineWidth=lHlineWidth,lHlineStyle=lHlineStyle,
+    #                         lVline=lVline,lVlineColor=lVlineColor,lVlineWidth=lVlineWidth,lVlineStyle=lVlineStyle,
+    #             lAffline=lAffline,lAfflineColor=lAfflineColor,lAfflineWidth=lAfflineWidth,lAfflineStyle=lAfflineStyle,
+    #                         lXScale=lXScale,lYScale=lYScale,pScale=pScale,lXOffset=lXOffset,lYOffset=lYOffset,
+    #                         LegLoc=LegLoc,LegPos=LegPos,LegCol=LegCol,LegSize=LegSize,
+    #                         lText=lText,lTextPos=lTextPos,lTextAlign=lTextAlign,lTextColor=lTextColor,
+    #                         lCol=lCol,lMark=lMark,lMarkSize=lMarkSize,lMarkWidth=lMarkWidth,MarkPoints=MarkPoints,
+    #                         lLineSize=lLineSize,lStyle=lStyle,lAlpha=lAlpha,nf=nfig)
+
+
 if __name__ == "__main__":
 	main(sys.argv[1:])

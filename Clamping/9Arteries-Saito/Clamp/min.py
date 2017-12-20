@@ -23,13 +23,22 @@ from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 
 def main(argv) :
+	# -----------------------------------------------------
+    # ---- PATH 
+	hd = header()
+	hd.headerInput(argv) ; 
 
+	# LINUX
 	HOME    = "/home/ventre/"
 	PATHs   = "Documents/Boulot/Thèse/code/bloodflow/bloodflow/scripts/Clamping/9Arteries-Saito/"
-	State   = "Sane/"
+	State   = "Clamp"
+	# # MAC 
+ 	# HOME    = "/Users/jeanneventre/"
+	# PATHs   = "Documents/Boulot/Thèse/code/bloodflow/scripts/Clamping/9Arteries-Saito/"
 
 	integ = PATHs + State 
-
+	# -----------------------------------------------------
+    # ---- READ RESULTS IN FILES 
 	liX         = []
 	liY         = []
 	lFileSep    = []
@@ -39,7 +48,7 @@ def main(argv) :
 	liX.append(0)
 	liY.append([1,2,3,4,5,6,7,8,9])
 	lFileSep.append(",")
-	lFile.append( PATHs + State + "res.csv")
+	lFile.append( PATHs + State + "/" + "res.csv")
 	nplot = len(lFile)
 	for j in range(0,nplot):	
 		Data = np.genfromtxt(lFile[j], delimiter =  str(lFileSep[j]))
@@ -68,5 +77,8 @@ def main(argv) :
 	print("nu = ", nuv)
 	print("E = ", E)
 	print("Rt = ", Rt)
+
+
+
 if __name__ == "__main__":
 	main(sys.argv[1:])
