@@ -1,0 +1,2 @@
+#Artery,<Nx>,<Nl>,<L> [cm],<rho> [g/cm^3],<mu> [g/cm/s],<Solver>,<Order>,<HR>,<Profile>,<Init_Profile>
+0,3200,5,25.00000000000000000000,1.00000000000000000000,0.02976956374307084333,KIN_HAT,1,HRQ,Polhausen,Polhausen
