@@ -22,8 +22,8 @@ from help_Geometry  import *
 from help_Inlet     import *
 from help_Network   import *
 
-from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
+from scipy.interpolate import interp1d
 
 def main(argv) :
 
@@ -65,14 +65,15 @@ def main(argv) :
     hd.Nxmax    = 200
 
     # Time properties
-    T_c     = 0.62 ;
+    T_c     = 0.57 ;
     ts_c    = 10. * T_c ;
     te_c    = 12. * T_c ; 
 
     # Boundary properties
     # Inlet
-    Q_c = 440.;
-    # Outlet    
+    # print(hd.Qstr)
+    Q_c = float(hd.Qstr)
+    # Outlet
     Pout_c  = 0. ; # Capillary pressure (used in RLC outflow bc)
     Rt_c    = float(hd.Rtstr) ;
     # Junction
@@ -104,9 +105,9 @@ def main(argv) :
     #############################
 
     # Length of the vessels (cm)
-    L = np.array( [ 4.0, 72.5, 2.0, 38.5, 3.9, 69.1, 34.5, 96.9, 96.9 ] )
+    L = np.array( [ 4.0, 72.5, 5., 2.0, 38.5, 3.9, 69.1, 5., 34.5, 96.9, 96.9 ] )
     # Radius of the artery (cm)
-    R = np.array( [ 1.5, 0.5, 1.3, 0.4, 1.2, 0.4, 0.8, 0.5, 0.5] )
+    R = np.array( [ 1.5, 0.5,0.4, 1.3, 0.4, 1.2, 0.4,0.4, 0.8, 0.5, 0.5] )
     # R = D / 2.
     D = 2. * R
     A = np.pi * R * R
@@ -124,10 +125,14 @@ def main(argv) :
     # Density (g/cm^3)
     rho = rho_c
     # Width of the wall (cm)
-    h = np.array( [ 0.16, 0.06, 0.12, 0.06, 0.1, 0.06, 0.1, 0.5, 0.5] )
-    # E = np.array( [ 0.4, 0.4, 0.4, 0.6, 0.4, 0.4,0.4, 0.8,0.8 ]) * 1e7
+    h = np.array( [ 0.16, 0.06,0.04, 0.12, 0.06, 0.1, 0.06,0.04, 0.1, 0.5, 0.5] )
 
-    E = float (hd.Kstr)
+    E1 = float (hd.Kstr)
+    print('E1= ',E1)
+    E2 = E1 * (0.4/1.6)**2
+    print('E2=',E2)
+    E = np.array( [ E1, E1, E2, E1, E1, E1, E1,E2 ,E1, E1, E1 ])
+
     # dE = np.array([0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2])*1e7
     # E = E+dE
 
@@ -220,7 +225,7 @@ def main(argv) :
     tS.t_start      = t_start
     tS.t_end        = t_end
     tS.Nt           = timeSteps
-    tS.storeStep    = storeStep
+    tS.storeStep    = storeStep 
     tS.CFL          = Ct
     tS.timeOrder    = int(hd.tOrderstr)
 
@@ -238,6 +243,7 @@ def main(argv) :
         Q_Input[i] = Q_c * Q(tt[i]/T_c - int(tt[i]/T_c),0.35)
 
     V_c         = integrate(tt,Q_Input) / ( te_c / T_c)
+    
     print ("---->Ejection period (s)                : ", T_c)
     print ("---->Stroke Volume (cm^3)               : ", V_c)
     print ("---->Cardiac Output (L/min)             : ", V_c / T_c * 60./1000.)
@@ -276,92 +282,9 @@ def main(argv) :
 
     arts[5].RtDAG( hConj=5,     Rt=Rt_c,                    tConj=hd.CONJ,nt=timeSteps)
 
-    # arts[6].jDAG( hConj=5,      dArts=[arts[7], arts[8]],   tConj=hd.CONJ,nt=timeSteps) 
-    # arts[7].RtDAG( hConj=7,     Rt= 0.724,                    tConj=hd.CONJ,nt=timeSteps)
-    # arts[8].RtDAG( hConj=7,     Rt= 0.724,                    tConj=hd.CONJ,nt=timeSteps)
-
-    # clamp here -------
-    arts[6].RtDAG( hConj=5,      Rt=1.,                      tConj=hd.CONJ,nt=timeSteps)
-    arts[7].RtDAG( hConj=10,     Rt=0.724,                    tConj=hd.CONJ,nt=timeSteps)
-    arts[8].RtDAG( hConj=10,     Rt=0.724,                    tConj=hd.CONJ,nt=timeSteps)
-
-
-    # iart = 0 ; ihconj = 0 ; itconj = iart + 1 ;
-    # arts[iart].daughterArts = [arts[1],arts[2]] ;
-    # # Head point
-    # arts[iart].headPt.append(point(ihconj));
-    # arts[iart].headPt[0].type  = "inP"              ; arts[iart].headPt[0].data  = P_Input ;
-    # # Tail point
-    # arts[iart].tailPt.append(point(itconj));
-    # arts[iart].tailPt[0].type = hd.CONJ                ; arts[iart].tailPt[0].data  = np.zeros(timeSteps);
-
-    # iart = 1 ; ihconj = 1 ; itconj = iart + 1 ;
-    # # Head point
-    # arts[iart].headPt.append(point(ihconj));
-    # arts[iart].headPt[0].type  = hd.CONJ               ; arts[iart].headPt[0].data  = np.zeros(timeSteps);
-    # # Tail point
-    # arts[iart].tailPt.append(point(itconj));
-    # arts[iart].tailPt[0].type = "outRt"             ; arts[iart].tailPt[0].data  = Rt_Output;
-
-    # iart = 2 ; ihconj = 1 ; itconj = iart + 1 ;
-    # arts[iart].daughterArts = [arts[3],arts[4]] ;
-    # # Head point
-    # arts[iart].headPt.append(point(ihconj));
-    # arts[iart].headPt[0].type  = hd.CONJ               ; arts[iart].headPt[0].data  = np.zeros(timeSteps);
-    # # Tail point
-    # arts[iart].tailPt.append(point(itconj));
-    # arts[iart].tailPt[0].type = hd.CONJ                ; arts[iart].tailPt[0].data  = np.zeros(timeSteps);
-
-    # iart = 3 ; ihconj = 3 ; itconj = iart + 1 ;
-    # # Head point
-    # arts[iart].headPt.append(point(ihconj));
-    # arts[iart].headPt[0].type  = hd.CONJ               ; arts[iart].headPt[0].data  = np.zeros(timeSteps);
-    # # Tail point
-    # arts[iart].tailPt.append(point(itconj));
-    # arts[iart].tailPt[0].type = "outRt"             ; arts[iart].tailPt[0].data  = Rt_Output ;
-
-    # iart = 4 ; ihconj = 3 ; itconj = iart + 1 ;
-    # arts[iart].daughterArts = [arts[5],arts[6]] ;
-    # # Head point
-    # arts[iart].headPt.append(point(ihconj));
-    # arts[iart].headPt[0].type  = hd.CONJ               ; arts[iart].headPt[0].data  = np.zeros(timeSteps);
-    # # Tail point
-    # arts[iart].tailPt.append(point(itconj));
-    # arts[iart].tailPt[0].type = hd.CONJ                ; arts[iart].tailPt[0].data  = np.zeros(timeSteps) ;
-
-    # iart = 5 ; ihconj = 5 ; itconj = iart + 1 ;
-    # # Head point
-    # arts[iart].headPt.append(point(ihconj));
-    # arts[iart].headPt[0].type  = hd.CONJ               ; arts[iart].headPt[0].data  = np.zeros(timeSteps);
-    # # Tail point
-    # arts[iart].tailPt.append(point(itconj));
-    # arts[iart].tailPt[0].type = "outRt"             ; arts[iart].tailPt[0].data  = Rt_Output ;
-
-    # iart = 6 ; ihconj = 5 ; itconj = iart + 1 ;
-    # arts[iart].daughterArts = [arts[7],arts[8]] ;
-    # # Head point
-    # arts[iart].headPt.append(point(ihconj));
-    # arts[iart].headPt[0].type  = hd.CONJ               ; arts[iart].headPt[0].data  = np.zeros(timeSteps);
-    # # Tail point
-    # arts[iart].tailPt.append(point(itconj));
-    # arts[iart].tailPt[0].type = hd.CONJ                ; arts[iart].tailPt[0].data  = np.zeros(timeSteps);
-
-    # iart = 7 ; ihconj = 7 ; itconj = iart + 1 ;
-    # # Head point
-    # arts[iart].headPt.append(point(ihconj));
-    # arts[iart].headPt[0].type  = hd.CONJ               ; arts[iart].headPt[0].data  = np.zeros(timeSteps);
-    # # Tail point
-    # arts[iart].tailPt.append(point(itconj));
-    # arts[iart].tailPt[0].type = "outRt"             ; arts[iart].tailPt[0].data  = Rt_Output ;
-
-    # iart = 8 ; ihconj = 7 ; itconj = iart + 1 ;
-    # # Head point
-    # arts[iart].headPt.append(point(ihconj));
-    # arts[iart].headPt[0].type  = hd.CONJ               ; arts[iart].headPt[0].data  = np.zeros(timeSteps);
-    # # Tail point
-    # arts[iart].tailPt.append(point(itconj));
-    # arts[iart].tailPt[0].type = "outRt"             ; arts[iart].tailPt[0].data  = Rt_Output ;
-
+    arts[6].jDAG( hConj=5,      dArts=[arts[7], arts[8]],   tConj=hd.CONJ,nt=timeSteps) 
+    arts[7].RtDAG( hConj=7,     Rt= 0.724,                    tConj=hd.CONJ,nt=timeSteps)
+    arts[8].RtDAG( hConj=7,     Rt= 0.724,                    tConj=hd.CONJ,nt=timeSteps)
 
     #############################
     # Network definition

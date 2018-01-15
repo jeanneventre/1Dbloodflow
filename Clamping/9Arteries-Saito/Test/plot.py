@@ -58,15 +58,14 @@ def main(argv) :
     Conj     = "jS"
 
     nuv      = hd.Cvstr
-    E        = hd.Kstr
     Rt       = hd.Rtstr
+    C        = hd.Cstr
     Q        = hd.Qstr
-    P1       = hd.P1
 
-    State = "Sane"
+    State = "Test"
 
-    PATH    = PATH1D + State + "/" + NN + "/" + Conj + "/nuv=" + nuv + "/E=" + E + "/Rt=" + Rt + "/Q=" + Q + "/P1=" + P1 + "/Nx=" + Nx + "/xOrder=" + xOrder + "/dt=" + dt + "/tOrder=" + tOrder + "/" + Solver + "/" + HR + "/"
-    
+    PATH    = PATH1D + State + "/" + NN + "/" + Conj + "/nuv=" + nuv + "/Rt=" + Rt + "/C=" + C + "/Nx=" + Nx + "/xOrder=" + xOrder + "/dt=" + dt + "/tOrder=" + tOrder + "/" + Solver + "/" + HR + "/"
+    # print(PATH)
     Store   = PATH1D + State + "Figures"
     # -----------------------------------------------------
     # ---- PATIENT DATA
@@ -130,13 +129,15 @@ def main(argv) :
     os.chdir(integ)
     fileName = 'res.csv' 
 
-    if (float(nuv) == 5e4) and (float(E) == 0.4e7) and(float(Rt) == 0.35) and (float(Q)==450) and (float(P1) == 0.325):
-        os.remove(fileName)
-        fh = open(fileName, 'w')
+    # if (float(nuv) == 5e4) and (float(E) == 0.3e7) and(float(Rt) == 0.3) and (float(Nx) == 10):
+        # os.remove(fileName)
+        # fh = open(fileName, 'w')
         # fh.write(" nuv, \t E, \t Rt, \t a,\t b, \t (a-b) \t \n")
 
-    fh = open(fileName, 'a')
-    fh.write("%.20f, \t %d, \t %.3f, \t %d, \t %.3f, \t %.20f, \t %.20f, \t %.20f,  \t %.20f"%(float(nuv),float(E),float(Rt),float(Q),float(P1), R2, Linf, L1,L2) + "\n")
+    # fh = open(fileName, 'a')
+    # fh.write("%.20f, \t %d, \t %.3f, \t %d, \t %.20f, \t %.20f, \t %.20f,  \t %.20f"%(float(nuv),float(E),float(Rt),float(Nx), R2, Linf, L1,L2) + "\n")
+    
+    # fh.write("%f, \t %f, \t %.20f, \t %.20f, \t %.20f, \t %.20f"%(float(Rt),float(C), R2, Linf, L1,L2) + "\n")
     # -----------------------------------------------------
     # ---- PLOT RESULTS
         
@@ -152,7 +153,7 @@ def main(argv) :
     # plt.ylim([60,150])
     plt.xlabel('time (s)', fontsize=12)
     plt.ylabel('pressure (mmHg)',fontsize=12)
-    plt.text(0.4,95, "E = %d \n Rt = %.2f "%(float(E),float(Rt)), fontsize=14)
+    # plt.text(0.4,95, "E = %d \n Rt = %.2f "%(float(E),float(Rt)), fontsize=14)
     plt.legend(fontsize=12)
     plt.title('Pre Clamp pressure in the right radial artery',fontsize=14)
     plt.show()

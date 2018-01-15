@@ -7,14 +7,6 @@ import math     as mt
 from bfS_libDef import *
 
 from help_Input     import *
-import sys, getopt
-import os
-import numpy    as np
-import math     as mt
-
-from bfS_libDef import *
-
-from help_Input     import *
 
 from help_Sum       import *
 from help_Wave      import *
@@ -22,6 +14,7 @@ from help_Geometry  import *
 from help_Inlet     import *
 from help_Network   import *
 
+import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 
 def main(argv) :
@@ -70,7 +63,10 @@ def main(argv) :
 
     # Boundary properties
     # Inlet
-    Q_c = 370
+    # print(hd.Qstr)
+    Q_c = float(hd.Qstr)
+    P1 = float(hd.P1)
+
     # Outlet
     Pout_c  = 0. ; # Capillary pressure (used in RLC outflow bc)
     Rt_c    = float(hd.Rtstr) ;
@@ -219,7 +215,7 @@ def main(argv) :
     tS.t_start      = t_start
     tS.t_end        = t_end
     tS.Nt           = timeSteps
-    tS.storeStep    = storeStep
+    tS.storeStep    = storeStep 
     tS.CFL          = Ct
     tS.timeOrder    = int(hd.tOrderstr)
 
@@ -229,62 +225,20 @@ def main(argv) :
 
     # Inlet
 
-    Q_Input = Q_c * PulseSin(T_c, tt)
+    def Q(t,alpha):
+        return np.sin(np.pi * t/alpha)*(t<alpha)
+
+    Q_Input = np.zeros(timeSteps)
+    for i in range(0,timeSteps):
+        Q_Input[i] = Q_c * Q(tt[i]/T_c - int(tt[i]/T_c), P1)
+
     V_c         = integrate(tt,Q_Input) / ( te_c / T_c)
+    
     print ("---->Ejection period (s)                : ", T_c)
     print ("---->Stroke Volume (cm^3)               : ", V_c)
     print ("---->Cardiac Output (L/min)             : ", V_c / T_c * 60./1000.)
     print ("---->Maximum Input Flow Rate (cm^3/s)   : ", Q_c)
     print ("---->Maximum Input Speed (cm/s)         : ", Q_c / A[0] )
-
-    # Q_Input     =   (   2.8e6 *   (   3.1199 +  7.7982 * np.sin( 2  * np.pi / T_c * tt + 0.5769)
-    #                                         +   4.1228 * np.sin( 4  * np.pi / (T_c) * tt - 0.8738)
-    #                                         -   1.0611 * np.sin( 6  * np.pi / (T_c)* tt + 0.7240)
-    #                                         +   0.7605 * np.sin( 8  * np.pi / (T_c) * tt -0.6387)
-    #                                         -   0.9148 * np.sin( 10 * np.pi / T_c * tt +1.1598)
-    #                                         +   0.4924 * np.sin( 12 * np.pi / T_c * tt -1.0905)
-    #                                         -   0.5580 * np.sin( 14 * np.pi / T_c * tt +1.042)
-    #                                         +   0.3280 * np.sin( 16 * np.pi / T_c * tt -0.5570)
-    #                                         -   0.3941 * np.sin( 18 * np.pi / T_c * tt +1.2685)
-    #                                         +   0.2833 * np.sin( 20 * np.pi / T_c * tt +0.6702)
-    #                                         +   0.2272 * np.sin( 22 * np.pi / T_c * tt -1.4983)
-    #                                         +   0.2249 * np.sin( 24 * np.pi / T_c * tt +0.9924)
-    #                                         +   0.2589 * np.sin( 26 * np.pi / T_c * tt -1.5616)
-    #                                         -   0.1460 * np.sin( 28 * np.pi / T_c * tt -1.3106)
-    #                                         +   0.2141 * np.sin( 30 * np.pi / T_c * tt -1.1306)
-    #                                         -   0.1253 * np.sin( 32 * np.pi / T_c * tt +0.1552)
-    #                                         +   0.1321 * np.sin( 34 * np.pi / T_c * tt -1.5595)
-    #                                         -   0.1399 * np.sin( 36 * np.pi / T_c * tt +0.4223)
-    #                                         -   0.0324 * np.sin( 38 * np.pi / T_c * tt +0.7811)
-    #                                         -   0.1211 * np.sin( 40 * np.pi / T_c * tt +1.0729)
-    #                             ) /1000./60./2.5
-    #                 )
-
-    # Q_Input = 3e6/1000./60/2.5 * (2.5+ 7*( np.sin(2*np.pi /T_c * (tt-0.5)) + 0.5*np.sin(4*np.pi /T_c * (tt-0.5))) )#+ 0.5*np.sin(12*np.pi/T_c * tt))
-
-    # x = np.array([ 139263.08977103  , 30633.91621266,   -3343.23891143,  -11180.43854173,
-    # 673.36107665 ,  -2908.83686411,    1646.90656992  ,  -416.15620448,
-    # -1330.41989531])
-
-    # P_Input = x[0] + x[1] * np.sin(2 * np.pi/T_c * tt + x[2]) + x[3] * np.sin(4*np.pi/T_c * tt + x[4]) + x[5] * np.sin(6 * np.pi/T_c *tt + x[6])- x[7] * np.sin(14*np.pi/T_c * tt +x[8])
-
-    # a               = 217.801         
-    # b               = 299.778          
-    # c               = -68.602         
-    # d               = -291.923         
-    # e               = 39.217           
-    # f               = 42.4621     
-    # g               = 53.7485  
-
-
-    # Q_Input = a+ b * np.sin(2*np.pi/T_c * tt +c) + d * np.sin(4*np.pi/T_c * tt + e) + f*np.sin(6*np.pi/T_c *tt+g)
-
-
-    # Q_Input = 3e6/1000./60. * (np.sin(2*np.pi*tt/(T_c-0.1) * (tt< ts_c + T_c)))
-
-    # P_Input = 180000 + 30000 * PulseSin(T_c,tt)  
-
-    # P_Input = 95000 + 25000 * np.sin(2*np.pi /T_c * tt - 1.2)
 
     # Oulet
 

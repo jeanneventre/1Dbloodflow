@@ -60,22 +60,24 @@ def main(argv) :
     
     State = "Clamp"
 
+    
+    # for E in ["0.4e7","0.45e7", "0.5e7"]:
+
     PATH    = PATH1D + State + "/" + NN + "/" + Conj + "/nuv=" + nuv + "/E=" + E + "/Rt=" + Rt + "/Nx=" + Nx + "/xOrder=" + xOrder + "/dt=" + dt + "/tOrder=" + tOrder + "/" + Solver + "/" + HR + "/"
     Store   = PATH1D + State + "Figures"
     # -----------------------------------------------------
     # ---- PATIENT DATA
-    t = np.linspace(0,0.57,num=58) 
-
+    t = np.linspace(0,0.62,num=63) 
     Pexp = np.array([66.93, 67.20,67.92,70.15,74.23,80.20,87.22,95.21,103.36,111.38,118.71,125.16,130.58,135.10,138.24,140.45,141.54,141.93,141.40,140.34,
                     138.58,136.65,134.35,132.01,129.30,126.66,123.57,120.17,116.40,112.29,107.91,103.56,99.15,95.13,91.39,88.17,85.34,82.92,80.80,79.15,
-                    77.86,76.92,76.09,75.49,74.92,74.50,74.02,73.73,73.32,72.98,72.59,72.27,71.80,71.48,70.96,70.56,70.00,69.49])
-    # # -----------------------------------------------------
+                    77.86,76.92,76.09,75.49,74.92,74.50,74.02,73.73,73.32,72.98,72.59,72.27,71.80,71.48,70.96,70.56,70.00,69.49,68.88,68.38,67.76,67.23,66.84])
+    # -----------------------------------------------------
     for pType in ["P"] :
 
         pName,pLabel = out.getType(pType)
 
         # Time properties
-        T_c     = 0.57 ;
+        T_c     = 0.62 ;
         ts_c    = 10. * T_c ;
         te_c    = 12. * T_c ; 
 
@@ -99,22 +101,23 @@ def main(argv) :
             a =  sp.integrate.trapz(Data[:,3],axis=0, dx = dx)
             a = a/2;
             Data[:,0] = Data[:,0] - Data[70,0]  
-    # -----------------------------------------------------
-    # ---- CALCULATIONS
-    # b = sp.integrate.trapz(Pexp, axis=0, dx=0.01)  
-    D  = np.zeros(115)
-    tt = np.zeros(115)
+
+    # # -----------------------------------------------------
+    # # ---- CALCULATIONS
+    # # b = sp.integrate.trapz(Pexp, axis=0, dx=0.01)  
+    D  = np.zeros(125)
+    tt = np.zeros(125)
     
-    for i in range(115):
+    for i in range(125):
         k = round(0.01/dx*i)
         # print(k)  
         D[i] = Data[int(k),3]
         tt[i] = Data[int(k),0]
 
-    R2   = metrics.r2_score(Pexp, D[8:66], multioutput ='uniform_average')
-    Linf = max(abs(Pexp-D[8:66]))/max(abs(Pexp))
-    L1   = sp.integrate.trapz(abs(Pexp-D[8:66]), dx = 0.01)/sp.integrate.trapz(abs(Pexp), dx=0.01) 
-    L2   = np.sqrt(sp.integrate.trapz((Pexp-D[8:66])**2, dx=0.01))/np.sqrt(sp.integrate.trapz(Pexp**2,dx=0.01))
+    R2   = metrics.r2_score(Pexp, D[8:71], multioutput ='uniform_average')
+    Linf = max(abs(Pexp-D[8:71]))/max(abs(Pexp))
+    L1   = sp.integrate.trapz(abs(Pexp-D[8:71]), dx = 0.01)/sp.integrate.trapz(abs(Pexp), dx=0.01) 
+    L2   = np.sqrt(sp.integrate.trapz((Pexp-D[8:71])**2, dx=0.01))/np.sqrt(sp.integrate.trapz(Pexp**2,dx=0.01))
     # -----------------------------------------------------
     # ---- WRITE RESULTS IN FILES 
     os.chdir(HOME)
@@ -122,29 +125,30 @@ def main(argv) :
     os.chdir(integ)
     fileName = 'res.csv' 
 
-    if (float(nuv) == 5e4) and (float(E) == 0.2e7) and(float(Rt) == 0):
+    if (float(nuv) == 5e4) and (float(E) == 0.4e6) and(float(Rt) == 0.1) and (float(Nx) == 5):
         os.remove(fileName)
         # fh = open(fileName, 'w')
         # fh.write(" nuv, \t E, \t Rt, \t a,\t b, \t (a-b) \t \n")
 
     fh = open(fileName, 'a')
-    fh.write("%.20f, \t %20f, \t %.20f, \t %.20f, \t %.20f, \t %.20f,  \t %.20f"%(float(nuv),float(E),float(Rt), R2, Linf, L1,L2) + "\n")
+    fh.write("%.20f, \t %d, \t %.3f, \t %d, \t %.20f, \t %.20f, \t %.20f,  \t %.20f"%(float(nuv),float(E),float(Rt),float(Nx), R2, Linf, L1,L2) + "\n")
     # -----------------------------------------------------
     # ---- PLOT RESULTS
     # # TEST PLOT
     ax = plt.gca()
     ax.yaxis.set_tick_params(labelsize=12)
     ax.xaxis.set_tick_params(labelsize=12)
-
     plt.plot(t,Pexp,linewidth= 2, label='Experimental')
-    plt.plot(tt[8:66],D[8:66],linewidth=2,label='Simulated')
+    plt.plot(tt[8:71],D[8:71],linewidth=2,label= 'Simulated')
     # plt.plot(Data[:,0], Data[:,3], label='Simulated') 
-    # plt.xlim([-0.1,2*0.57])
+    # plt.xlim([-0.1,2*0.57])  
+    # plt.ylim([60,150])
     plt.xlabel('time (s)', fontsize=12)
     plt.ylabel('pressure (mmHg)',fontsize=12)
-    plt.text(0.4,120, "E = %d \n Rt = %.1f "%(float(E),float(Rt)), fontsize=14)
+    plt.text(0.42,100, "Rt = %.2f \n E = %d"%(float(Rt), float(E)))
     plt.legend(fontsize=12)
-    plt.title('Post Clamp pressure in the right radial artery',fontsize=14)
+    plt.title("Post Clamp pressure for different Young's modulus",fontsize=14)
+    
     plt.show()
     # # 
 
