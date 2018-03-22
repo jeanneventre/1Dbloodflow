@@ -1,0 +1,25 @@
+\begin{thebibliography}{1}
+
+\bibitem{HP}
+{\sc J.~Fullana}, {\em Hyperelastic laws},  (2017).
+
+\bibitem{tesi}
+{\sc A.~Ghigo}, {\em Reduced-Order Models for Blood Flow in Networks of Large
+  Arteries}, PhD thesis, Université Pierre et Marie Curie, 2017.
+
+\bibitem{rusanov}
+{\sc A.~H. Hakim}, {\em The muscl-hancock scheme for solution of hyperbolic
+  equations},  (2016).
+
+\bibitem{num_met}
+{\sc S.~Mishra and R.~Abgrall}, {\em Numerical methods for conservation laws
+  and related equations},  (2016).
+
+\bibitem{salsa}
+{\sc S.~Salsa}, {\em Partial differential equations in action from modelling to
+  theory},  (2007).
+
+\bibitem{HLLC}
+{\sc E.~Toro}, {\em The hllc riemann solver}, 2012.
+
+\end{thebibliography}

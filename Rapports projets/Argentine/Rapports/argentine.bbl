@@ -1,0 +1,28 @@
+\begin{thebibliography}{1}
+
+\bibitem{viscoelastic}
+J.~Alastruey, A.W. Khir, K.S. Matthys, P.~Segers, S.J. Sherwin, P.R. Verdonck,
+  K.H. Parker, and J.~Peir\'o.
+\newblock Pulse wave propagation in a model human arterial network: Assessment
+  of 1-d visco-elastic simulations against in vitro measurements.
+\newblock {\em Journal of biomechanics}, 44:2250--2258, 2011.
+
+\bibitem{bypass}
+A.~R. Ghigo, S.~Abou~Taam, X.-F. Wang, P.-Y. Lagrée, and J.-M. Fullana.
+\newblock One-dimensional arterial network model for bypass grafts assessment.
+\newblock {\em Medical Engineering and Physics}, 43:39--47, 2007.
+
+\bibitem{Saito9}
+M.~Saito, Y.~Ikenaga, M.~Matsukawa, Y.~Watanabe, T.~Asada, and P.-Y. Lagrée.
+\newblock One-dimensional model for propagation of a pressure wave in a model
+  of the human arterial network: Comparison of theoretical and exeprimental
+  results.
+\newblock {\em Journal of Biomechanical Engineering}, 133, 2011.
+
+\bibitem{Cf}
+N.~P. Smith, A.~J. Pullan, and P.~J. Hunter.
+\newblock An anatomically based model of transient coronary blood flow in the
+  heart.
+\newblock {\em SIAM Journal on Applied Mathematics}, 62(3):990--1018, 2001.
+
+\end{thebibliography}
