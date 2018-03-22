@@ -38,36 +38,41 @@ def main(argv) :
 	liX.append(0)
 	liY.append([1,2,3,4,5,6])
 	lFileSep.append(",")
-	lFile.append( PATHs + State + "res.csv") 
+	lFile.append( PATHs + State + "res_nu.csv") 
 	nplot = len(lFile)
 	for j in range(0,nplot):	
 		Data = np.genfromtxt(lFile[j], delimiter =  str(lFileSep[j]))
 
 	# -----------------------------------------------------
     # ---- CALCULATIONS 
-	R2m   = max(Data[:,2])
-	Linfm = min(Data[:,3])
-	L1m   = min(Data[:,4])
-	L2m   = min(Data[:,5])
+	rows = Data.shape[0]
+	cols = Data.shape[1]
+
+	R2m   = max((Data[:,cols-4]))
+	Linfm = min(Data[:,cols-3])
+	L1m   = min(Data[:,cols-2])
+	L2m   = min(Data[:,cols-1])
 	
 	print('R2 : ', R2m)
 	print('Linf :', Linfm)
 	print('L1 : ', L1m)
 	print('L2 : ', L2m)
 	
-	iR2m   = np.argmax(Data[:,2])
-	iLinfm = np.argmin(Data[:,3])
-	iL1m   = np.argmin(Data[:,4])
-	iL2m   = np.argmin(Data[:,5])
+	iR2m   = np.argmax(Data[:,cols-4])
+	iLinfm = np.argmin(Data[:,cols-3])
+	iL1m   = np.argmin(Data[:,cols-2])
+	iL2m   = np.argmin(Data[:,cols-1])
 
-	C   = Data[iL2m,0]
-	Rt  = Data[iL2m,1]
-
-	print('C =', C)
-	print('Rt = ', Rt)
-
-	print('\n')
-	print('\n')
+	nuv   = Data[iL2m,0]
+	Q     = Data[iL2m,1]
+	Tej   = Data[iL2m,2]
+	Rt    = Data[iL2m,3]
+	C     = Data[iL2m,4]
+	print('nuv  = ',nuv)
+	print('Q    = ', Q)
+	print('Tej  = ', Tej)
+	print('Rt   = ', Rt)
+	print('C    = ', C)
 
 
 if __name__ == "__main__":

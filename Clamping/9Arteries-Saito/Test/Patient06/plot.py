@@ -1,4 +1,3 @@
-from help_Input     import *
 import sys, getopt
 import os
 import numpy    as np
@@ -62,11 +61,10 @@ def main(argv) :
     E        = hd.Kstr
     C        = hd.Cstr
     Q        = hd.Qstr
-    P1       = hd.P1
+    R1       = hd.P1
     Rt2      = hd.P2   
-    # R1       = hd.Rtstr
 
-    State = "Test"
+    State = "Test/Patient06"
 
     # PATH    = PATH1D + State + "/" + NN + "/" + Conj + "/nuv=" + nuv +  "/C=" + C + "/R1=" + R1 + "/R2=" + Rt2 + "/Nx=" + Nx + "/xOrder=" + xOrder + "/dt=" + dt + "/tOrder=" + tOrder + "/" + Solver + "/" + HR + "/"
     # print(PATH)
@@ -76,22 +74,21 @@ def main(argv) :
 
     # -----------------------------------------------------
     # ---- PATIENT DATA
-    t = np.linspace(0,0.57,num=58) 
-
-    Pexp = np.array([63.90,65.11, 66.11,  67.96,   70.70,   74.74,  79.48,  84.69,   89.68,  94.34,   98.26,   101.63,   104.42,   106.83,108.81,
-    110.14,110.91,   111.09,    110.80,    109.90,    108.72,    107.52,    106.09,    104.51,    102.51,    100.20,97.44,    94.54,    91.50,    
-    88.63,86.00,    83.69,    81.63,   79.91,    78.40,    77.17,   76.06,   75.23,   74.44,   73.83,   73.23,   72.63,   72.01,   71.47,   71.01,
-    70.49,69.99,  69.52,   69.03,  68.58,   68.12,    67.70,    67.17,    66.70,    66.18,    65.71,    65.25,    63.88])
-
-    # Pm = np.mean(Pexp)
-    # print(Pm)
+    T_c  = 1.13
+    N    = 114
+    t    = np.linspace(0,T_c,num=N) 
+    Pexp = np.array([59.30,59.51,60.15,62.52,66.88,72.86,80.78,90.51,101.16,111.85,121.30,127.63,131.18,133.58,134.05,133.88,132.82,131.15,129.60,
+    127.94,126.69,125.34,124.26,123.17,122.21,121.21,120.32,119.35,118.52,117.61,116.65,115.45,113.98,111.95,109.42,106.16,102.34,
+    97.99,93.64,89.68,86.55,84.37,83.24,82.83,82.61,83.27,83.93,84.17,84.21,84.04,83.87,83.44,82.95,82.53,82.11,81.45,80.73,80.05,
+    79.23,78.47,77.61,76.85,76.12,75.44,74.79,74.16,73.61,73.14,72.69,72.42,71.98,71.67,71.20,70.73,70.33,69.86,69.51,69.16,68.79,
+    68.49,68.28,68.10,67.87,67.63,67.33,67.00,66.62,66.29,65.85,65.49,65.13,64.96,64.70,64.53,64.41,64.12,63.98,63.93,63.59,63.37,
+    63.23,63.01,62.74,62.54,62.42,62.26,61.98,61.77,61.46,61.18,60.87,60.62,60.38,60.43])
     # -----------------------------------------------------
     for pType in ["P"] :
 
         pName,pLabel = out.getType(pType)
 
         # Time properties
-        T_c     = 0.57 ;
         ts_c    = 10. * T_c ;
         te_c    = 12. * T_c ; 
 
@@ -111,71 +108,59 @@ def main(argv) :
             Data[:,0] = Data[:,0] - ts_c 
             Data[:,[1,2,3]] = Data[:,[1,2,3]]*0.1*0.0075006375541921
             dx = Data[10,0] - Data[9,0]
-            # Data[:,0] = Data[:,0] - Data[410,0]
-            Data[:,0] = Data[:,0]# - Data[10,0]
-              
+            Data[:,0] = Data[:,0] - Data[50,0] 
+    
     # -----------------------------------------------------
     # ---- CALCULATIONS
     b = sp.integrate.trapz(Pexp, axis=0, dx=0.01)  
 
-    D  = np.zeros(58)
-    tt = np.zeros(58)
+    D  = np.zeros(120)
+    tt = np.zeros(120)
 
-    k=0
-
-    for i in range(0,58):
-        k = round(0.01/dx * i)      
+    for i in range(120):
+        k = round(0.01/dx * i)
         D[i] = Data[int(k),3]
         tt[i] = Data[int(k),0]
 
-    Dm = np.mean(D)
-    # print(Dm)
-    # print(89.12 * 0.0376)
-    
-    # R2 = np.sum((D[0:58] - np.mean(Q))**2)/ np.sum((Q - np.mean(Q))**2) 
-    R2   = metrics.r2_score(Pexp, D, multioutput ='uniform_average')
-    Linf = max(abs(Pexp-D))/max(abs(Pexp))
-    L1   = sp.integrate.trapz(abs(Pexp-D), dx = 0.01)/sp.integrate.trapz(abs(Pexp), dx=0.01) 
-    L2   = np.sqrt(sp.integrate.trapz((Pexp-D)**2, dx=0.01))/np.sqrt(sp.integrate.trapz(Pexp**2,dx=0.01))
+    # R2 = np.sum((D[5:63] - np.mean(Q))**2)/ np.sum((Q - np.mean(Q))**2) 
+    R2   = metrics.r2_score(Pexp, D[6:120], multioutput ='uniform_average')
+    Linf = max(abs(Pexp-D[6:120]))/max(abs(Pexp))
+    L1   = sp.integrate.trapz(abs(Pexp-D[6:120]), dx = 0.01)/sp.integrate.trapz(abs(Pexp), dx=0.01) 
+    L2   = np.sqrt(sp.integrate.trapz((Pexp-D[6:120])**2, dx=0.01))/np.sqrt(sp.integrate.trapz(Pexp**2,dx=0.01))
     # -----------------------------------------------------
     # ---- WRITE RESULTS IN FILES 
-    # os.chdir(HOME)
-    # integ = PATHs + State
-    # os.chdir(integ)
-    # fileName = 'res_nu.csv' 
+    os.chdir(HOME)
+    integ = PATHs + State
+    os.chdir(integ)
+    fileName = 'res.csv' 
 
-    # if (float(nuv) == 5e4) and (float(Rt2) == 7000) and (float(Q) == 300) and (float(P1) == 0.35) and (float(C)==1e-5):
-    #     os.remove(fileName)
-    #     fh = open(fileName, 'w')
+    if (float(nuv) == 5e4) and(float(R1) == 200) and (float(Rt2) == 1500) and (float(C) == 1e-4) :
+        os.remove(fileName)
+        fh = open(fileName, 'w')
         # fh.write(" nuv, \t E, \t Rt, \t a,\t b, \t (a-b) \t \n")
 
-    # fh = open(fileName, 'a')
-    # fh.write("%d, \t %.2f, \t %.d, \t %.20f, \t %.20f, \t %.20f, \t %.20f,  \t %.20f"%(float(Q), float(P1),float(Rt2), float(C), R2, Linf, L1,L2) + "\n")  
-
-    # fh.write("%d, \t %d, \t %.2f, \t %d, \t %.20f, \t %.20f, \t %.20f, \t %.20f, \t %.20f"%(float(nuv), float(Q),float(P1),float(Rt2),float(C), R2, Linf, L1,L2) + "\n")
+    fh = open(fileName, 'a')
+    fh.write("%d, \t %d, \t %.20f, \t %.20f, \t %.20f, \t %.20f,  \t %.20f"%(float(R1),float(Rt2),float(C), R2, Linf, L1,L2) + "\n")  
     # -----------------------------------------------------
     # ---- PLOT RESULTS
         
-        # TEST PLOT
-    os.chdir(HOME + PATHs + State)
+        # # TEST PLOT
     ax = plt.gca()
     ax.yaxis.set_tick_params(labelsize=12)
     ax.xaxis.set_tick_params(labelsize=12)
-    plt.plot(t,Pexp,'k',linewidth= 2, label='Experimental')
-    plt.plot(tt[0:58:2],D[0:58:2],'r^-',ms=7,linewidth=1,label='Simulated')
+    plt.plot(t,Pexp,linewidth= 2, label='Experimental')
+    plt.plot(tt[6:120],D[6:120],linewidth=2,label='Simulated')
     # plt.plot(Data[:,0], Data[:,3], label = 'Simulated')
-    # plt.plot(Data[:,0], np.mean(Data[4*102:1020,1])*np.ones(Data[:,0].shape))
         # plt.xlim([-0.1,2*0.57])
 
-    # plt.ylim([50,180])
-    plt.xlabel('Time (s)', fontsize=12)
-    plt.ylabel('Pressure (mmHg)',fontsize=12)
-    plt.text(0.35,85, "nuv = %d \n Q = %d \nTej = %.2f \nR1 = %d \nR2 = %d \nC = %.7f "%(float(nuv),float(Q), float(hd.P1), 720, float(Rt2), float(C)), fontsize=14)
-    # plt.text(0.4,85, " Q = %d \n Tej = %.2f \n"%(float(Q),float(P1)),fontsize =14)
+    # plt.ylim([60,150])
+    plt.xlabel('time (s)', fontsize=12)
+    plt.ylabel('pressure (mmHg)',fontsize=12)
+    # plt.text(0.35,95, "Q = %d \n Tej = %.2f \n R1 = %d \n R2 = %d \n C = %.7f "%(400,0.35, float(R1), float(Rt2), float(C)), fontsize=14)
     plt.legend(fontsize=12)
-    plt.title('Pre Clamp pressure wave comparison',fontsize=14)
-    # plt.savefig('Best_pre_clamp2.eps')
+    plt.title('Pre Clamp pressure in the right radial artery',fontsize=14)
     plt.show()
+    # # 
 
     # pathlib.Path(Store).mkdir(parents=True, exist_ok=True) 
     # os.chdir(HOME)

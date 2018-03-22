@@ -48,16 +48,16 @@ def main(argv) :
     # write_Opt_t(cls=wb,numArt=iArt,lX=lX,pType='U')
     # write_Opt_t(cls=wb,numArt=iArt,lX=lX,pType='T')
 
-    for iArt in [0.,1.,5.,7.,8.] :
+    for iArt in [0.,1.,5.] :
 
         lX = [ 0., L[iArt]/2., L[iArt]]
 
         for pType in ["Q","P"] :
             write_Opt_t(cls=wb,numArt=int(iArt),lX=lX,pType=pType)
 
-        # lXmid = [L[iArt]/2.]
+        lXmid = [L[iArt]/2.]
 
-        # write_Opt_t_All(cls=wb,numArt=int(iArt),lX=lXmid)
+        write_Opt_t_All(cls=wb,numArt=int(iArt),lX=lXmid)
 
 
 if __name__ == "__main__":

@@ -46,7 +46,7 @@ def main(argv) :
         amu_c   = 0. ;
 
     # Mechanical properties
-    nuv_c   = float(hd.Cvstr)
+    nuv_c   = 0.; # float(hd.Cvstr)
     Knl_c   = 0.
 
     # Numerical properties
@@ -57,35 +57,20 @@ def main(argv) :
     hd.Nxmax    = 200
 
     # Time properties
-    T_c     = 0.57 ;
-    ts_c    = 10. * T_c ;
-    te_c    = 15. * T_c ; 
-
+    T_c     = 1 ;
+    ts_c    = 0. * T_c ;
+    te_c    = 13. * T_c ; 
 
     # P1 = float(hd.P1)
 
     # Boundary properties
     # Inlet
-    Q_c = float(hd.Qstr)
-    Tej = float(hd.P1)
-
-    # Q_c = 400;
-    # Tej = 0.35;
+    Q_c = 600;
+    Tej = 0.35;
 
     # Outlet
     Pout_c  = 0.  ; # Capillary pressure (used in RLC outflow bc)
-    # Rt_c = float(hd.Rtstr)
-
-    C1_c = float(hd.Cstr)
-    # # Rt   = float(hd.Rtstr)
-    # R1 = float(hd.Rtstr)
-    R2_c = float(hd.P2)
-
-    # Rt = (R2 - R1 )/(R1+R2)
-
-    # print("Rt    : ", Rt)
-    # print("R1    : ", R1)
-    # print("R2    : ", R2)
+    P_c = 0 
 
     # Junction
     fact_c  = 1 ;
@@ -118,13 +103,13 @@ def main(argv) :
     # Geometrical parameters
     #############################
 
-    # Length of the vessels (cm)
-    L = np.array( [ 4.0, 72.5, 2.0, 38.5, 3.9, 69.1, 34.5, 96.9, 96.9 ] )
+    # Length of the vessems(cm)
+    L = np.array( [ 10, 10, 10] )
     #  + 5 cm in each arm 
     # L = np.array( [ 4.0, 77.5, 2.0, 38.5, 3.9, 74.1, 34.5, 96.9, 96.9 ] )
 
     # Radius of the artery (cm)
-    R = np.array( [ 1.5, 0.5, 1.3, 0.4, 1.2, 0.4, 0.8, 0.5, 0.5] )
+    R = np.array( [ 1.5, 1.5, 1.5] )
     # R = D / 2.
     D = 2. * R
     A = np.pi * R * R
@@ -142,17 +127,19 @@ def main(argv) :
     # Density (g/cm^3)
     rho = rho_c
     # Width of the wall (cm)
-    h = np.array( [ 0.16, 0.06, 0.12, 0.06, 0.1, 0.06, 0.1, 0.05, 0.05] )
-    # E = float(hd.Kstr) #0.44e7;
-    
+    h = np.array( [0.1, 0.1, 0.1] )
+    E = 0.44e7;
+
+    Res  = 8*mu1_c*L/(np.pi * R**4)
+  
     # E = float (hd.Kstr)
-    E = np.array([0.4, 0.4,0.4,0.6,0.4,0.4,0.4,0.8,0.8])*1e7
 
     # dE = np.array([0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2])*1e7
     # E = E+dE
 
     # Stiffness coefficient beta (g/cm^2/s^2 ~ Pa/m = 0.1 g/(cm*s)^2)
     K = rigidity(E,h,R)
+    print(K)
     # Viscoelasticity coefficient C_v (cm^2/s)
     nuv = nuv_c
     Cv  = viscoelasticity(rho,nuv,h,R)
@@ -207,23 +194,17 @@ def main(argv) :
     # Define default arterial properties
     hd.headerNum    (arts,L,c)
     hd.headerProp   (arts,rho,L,R,K,Cv,Knl)
-
-    # for iPatho in [1,5]:
-    #     arts[iPatho].R =  R[iPatho] * patho_R(x=arts[iPatho].x,xs=0.9*arts[iPatho].L,xe=2./3.*arts[iPatho].L,dR=dR_c)
-    #     # arts[iPatho].K =  K[iPatho] * patho_K(x=arts[iPatho].x,xs=0.9*arts[iPatho].L,xe=1.*arts[iPatho].L,dK=dK_c)
-
-
     hd.headerRheo   (arts,phi,mu0,mu1,kmu,amu)
     hd.headerInit   (arts,F_c,H_c,C_c,O_c)
     hd.headerBC     (arts,fact_c,Pout_c)
 
     hd.headerOutput (arts)
     # Set specific output points
-    for i in range(NArt) :
-        arts[i].outPut = []
-        arts[i].outPut.append(0)
-        arts[i].outPut.append(arts[i].N/2)
-        arts[i].outPut.append(arts[i].N-1)
+    # for i in range(NArt) :
+    #     arts[i].outPut = []
+    #     arts[i].outPut.append(0)
+    #     arts[i].outPut.append(arts[i].N/2)
+    #     arts[i].outPut.append(arts[i].N-1)
 
     #############################
     # Time setup
@@ -254,6 +235,7 @@ def main(argv) :
 
     dt_store    = 1.e-3 * (t_end-t_start)
     storeStep   = max(1,int(dt_store / dt))
+
     print ("---->Time step dt = ", dt)
     print ("---->CFL Time step dt_CFL = ",dt_CFL)
 
@@ -280,9 +262,8 @@ def main(argv) :
     for i in range(0,timeSteps):
         Q_Input[i] = Q_c * Q(tt[i]/T_c - int(tt[i]/T_c),Tej)
 
-    # Qq = np.mean(Q_Input)
-    # print(Qq)
-    # Q_Input = Qq * np.ones(timeSteps)
+    Qq = np.mean(Q_Input)
+    Q_Input = Qq * np.ones(timeSteps)
 
     V_c         = integrate(tt,Q_Input) / ( te_c / T_c)
     
@@ -293,6 +274,8 @@ def main(argv) :
     print ("---->Maximum Input Speed (cm/s)         : ", Q_c / A[0] )
 
     # Oulet
+    P_Output = P_c * np.ones(timeSteps)
+    Rt_Output = np.ones(timeSteps)
 
     # Rheology
     H_Input     = np.zeros(timeSteps)
@@ -310,44 +293,30 @@ def main(argv) :
     # Construct network
     #############################
 
-    R1_c = Impedance(rho, K, A)[1]
-    # print(Impedance(rho, K, A)[1])
-    Rt_c = (R2_c - R1_c)/(R2_c + R1_c) 
+    iart = 0 ; ihconj = 0 ; itconj = iart + 1 ;
+    arts[iart].daughterArts = [arts[1],arts[2]] ;
+    # Head point
+    arts[iart].headPt.append(point(ihconj));
+    arts[iart].headPt[0].type = "inQ"   ; arts[iart].headPt[0].data = Q_Input   ;
+    # Tail point
+    arts[iart].tailPt.append(point(itconj));
+    arts[iart].tailPt[0].type = hd.CONJ    ; arts[iart].tailPt[0].data = np.zeros(timeSteps);
 
-    print( "---------> R1 : ", R1_c)
-    print( "---------> R2 : ", R2_c)
-    print( "---------> Rt : ", Rt_c)
-    
-    arts[0].iDAG(   hConj=0,        dArts=[arts[1], arts[2]],
-                    xType="inQ",    xData=Q_Input,
-                    FData=F_Input,  HData=H_Input,          tConj=hd.CONJ,nt=timeSteps)
-    
-    # arts[1].RtDAG( hConj=3,     Rt=Rt_c,                    tConj=hd.CONJ,nt=timeSteps)
+    iart = 1 ; ihconj = 1 ; itconj = iart + 1 ;
+    # Head point
+    arts[iart].headPt.append(point(ihconj));
+    arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # Tail point
+    arts[iart].tailPt.append(point(itconj));
+    arts[iart].tailPt[0].type = "outP"  ; arts[iart].tailPt[0].data = P_Output     ;
 
-    arts[1].RCRDAG( hConj=1,    R1= R1_c,
-                                C1= C1_c,
-                                R2= R2_c-Impedance(rho,K,A)[1],                                                        
-                                tConj=hd.CONJ,nt=timeSteps)
-    # arts[1].RCRDAG( hConj=1,    R1= R1,
-    #                             C1= C1_c,
-    #                             R2= R2,                                                        
-    #                             tConj=hd.CONJ,nt=timeSteps)
-
-    arts[2].jDAG(  hConj=1,     dArts=[arts[3],arts[4]],    tConj=hd.CONJ,nt=timeSteps)
-    
-    arts[3].RtDAG( hConj=3,     Rt=0.784,                    tConj=hd.CONJ,nt=timeSteps)
-
-    arts[4].jDAG(  hConj=3,     dArts=[arts[5],arts[6]],    tConj=hd.CONJ,nt=timeSteps)
-
-    arts[5].RtDAG( hConj=5,     Rt=Rt_c,                    tConj=hd.CONJ,nt=timeSteps)
-
-    arts[6].jDAG( hConj=5,      dArts=[arts[7], arts[8]],   tConj=hd.CONJ,nt=timeSteps) 
-    arts[7].RtDAG( hConj=7,     Rt= 0.724,                    tConj=hd.CONJ,nt=timeSteps)
-    arts[8].RtDAG( hConj=7,     Rt= 0.724,                    tConj=hd.CONJ,nt=timeSteps)
-
-    # arts[6].RtDAG( hConj=5,      Rt=1.,                      tConj=hd.CONJ,nt=timeSteps)
-    # arts[7].RtDAG( hConj=10,     Rt=0.724,                    tConj=hd.CONJ,nt=timeSteps)
-    # arts[8].RtDAG( hConj=10,     Rt=0.724,                    tConj=hd.CONJ,nt=timeSteps)
+    iart = 2 ; ihconj = 1 ; itconj = iart + 1 ;
+    # Head point
+    arts[iart].headPt.append(point(ihconj));
+    arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # Tail point
+    arts[iart].tailPt.append(point(itconj));
+    arts[iart].tailPt[0].type = "outP"  ; arts[iart].tailPt[0].data = P_Output     ;
 
 
     ############################

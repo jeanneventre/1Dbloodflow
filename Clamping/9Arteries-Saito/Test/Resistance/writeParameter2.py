@@ -42,11 +42,9 @@ def main(argv) :
         phi_c   = 0. ;
         mu0_c   = 0. ;
         mu1_c   = 0. ;
-        kmu_c   = 0. ;
-        amu_c   = 0. ;
 
     # Mechanical properties
-    nuv_c   = float(hd.Cvstr)
+    nuv_c   = 0.; # float(hd.Cvstr)
     Knl_c   = 0.
 
     # Numerical properties
@@ -57,35 +55,20 @@ def main(argv) :
     hd.Nxmax    = 200
 
     # Time properties
-    T_c     = 0.57 ;
-    ts_c    = 10. * T_c ;
-    te_c    = 15. * T_c ; 
-
+    T_c     = 0.62 ;
+    ts_c    = 0. * T_c ;
+    te_c    = 10. * T_c ; 
 
     # P1 = float(hd.P1)
 
     # Boundary properties
     # Inlet
-    Q_c = float(hd.Qstr)
-    Tej = float(hd.P1)
-
-    # Q_c = 400;
-    # Tej = 0.35;
+    Q_c = 400;
+    Tej = 0.52;
 
     # Outlet
     Pout_c  = 0.  ; # Capillary pressure (used in RLC outflow bc)
-    # Rt_c = float(hd.Rtstr)
-
-    C1_c = float(hd.Cstr)
-    # # Rt   = float(hd.Rtstr)
-    # R1 = float(hd.Rtstr)
-    R2_c = float(hd.P2)
-
-    # Rt = (R2 - R1 )/(R1+R2)
-
-    # print("Rt    : ", Rt)
-    # print("R1    : ", R1)
-    # print("R2    : ", R2)
+    P_c = 0 
 
     # Junction
     fact_c  = 1 ;
@@ -143,10 +126,8 @@ def main(argv) :
     rho = rho_c
     # Width of the wall (cm)
     h = np.array( [ 0.16, 0.06, 0.12, 0.06, 0.1, 0.06, 0.1, 0.05, 0.05] )
-    # E = float(hd.Kstr) #0.44e7;
-    
-    # E = float (hd.Kstr)
     E = np.array([0.4, 0.4,0.4,0.6,0.4,0.4,0.4,0.8,0.8])*1e7
+    # E = float (hd.Kstr)
 
     # dE = np.array([0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2])*1e7
     # E = E+dE
@@ -219,11 +200,11 @@ def main(argv) :
 
     hd.headerOutput (arts)
     # Set specific output points
-    for i in range(NArt) :
-        arts[i].outPut = []
-        arts[i].outPut.append(0)
-        arts[i].outPut.append(arts[i].N/2)
-        arts[i].outPut.append(arts[i].N-1)
+    # for i in range(NArt) :
+    #     arts[i].outPut = []
+    #     arts[i].outPut.append(0)
+    #     arts[i].outPut.append(arts[i].N/2)
+    #     arts[i].outPut.append(arts[i].N-1)
 
     #############################
     # Time setup
@@ -254,6 +235,7 @@ def main(argv) :
 
     dt_store    = 1.e-3 * (t_end-t_start)
     storeStep   = max(1,int(dt_store / dt))
+
     print ("---->Time step dt = ", dt)
     print ("---->CFL Time step dt_CFL = ",dt_CFL)
 
@@ -280,9 +262,9 @@ def main(argv) :
     for i in range(0,timeSteps):
         Q_Input[i] = Q_c * Q(tt[i]/T_c - int(tt[i]/T_c),Tej)
 
-    # Qq = np.mean(Q_Input)
-    # print(Qq)
-    # Q_Input = Qq * np.ones(timeSteps)
+    Qq = np.mean(Q_Input)
+    print(Qq)
+    Q_Input = Qq * np.ones(timeSteps)
 
     V_c         = integrate(tt,Q_Input) / ( te_c / T_c)
     
@@ -293,6 +275,8 @@ def main(argv) :
     print ("---->Maximum Input Speed (cm/s)         : ", Q_c / A[0] )
 
     # Oulet
+    P_Output = P_c * np.ones(timeSteps)
+    Rt_Output = np.zeros(timeSteps)
 
     # Rheology
     H_Input     = np.zeros(timeSteps)
@@ -310,45 +294,170 @@ def main(argv) :
     # Construct network
     #############################
 
-    R1_c = Impedance(rho, K, A)[1]
-    # print(Impedance(rho, K, A)[1])
-    Rt_c = (R2_c - R1_c)/(R2_c + R1_c) 
-
-    print( "---------> R1 : ", R1_c)
-    print( "---------> R2 : ", R2_c)
-    print( "---------> Rt : ", Rt_c)
-    
     arts[0].iDAG(   hConj=0,        dArts=[arts[1], arts[2]],
                     xType="inQ",    xData=Q_Input,
                     FData=F_Input,  HData=H_Input,          tConj=hd.CONJ,nt=timeSteps)
     
-    # arts[1].RtDAG( hConj=3,     Rt=Rt_c,                    tConj=hd.CONJ,nt=timeSteps)
+    arts[1].RDAG( hConj=1,     R1=5.28e3 ,                tConj=hd.CONJ,nt=timeSteps)
 
-    arts[1].RCRDAG( hConj=1,    R1= R1_c,
-                                C1= C1_c,
-                                R2= R2_c-Impedance(rho,K,A)[1],                                                        
-                                tConj=hd.CONJ,nt=timeSteps)
-    # arts[1].RCRDAG( hConj=1,    R1= R1,
-    #                             C1= C1_c,
-    #                             R2= R2,                                                        
-    #                             tConj=hd.CONJ,nt=timeSteps)
-
-    arts[2].jDAG(  hConj=1,     dArts=[arts[3],arts[4]],    tConj=hd.CONJ,nt=timeSteps)
+    arts[2].jDAG(  hConj=1,    dArts=[arts[3],arts[4]],     tConj=hd.CONJ,nt=timeSteps)
     
-    arts[3].RtDAG( hConj=3,     Rt=0.784,                    tConj=hd.CONJ,nt=timeSteps)
+    arts[3].RDAG( hConj=3,     R1=5e3,                      tConj=hd.CONJ,nt=timeSteps)
 
-    arts[4].jDAG(  hConj=3,     dArts=[arts[5],arts[6]],    tConj=hd.CONJ,nt=timeSteps)
+    arts[4].jDAG(  hConj=3,    dArts=[arts[5],arts[6]],     tConj=hd.CONJ,nt=timeSteps)
 
-    arts[5].RtDAG( hConj=5,     Rt=Rt_c,                    tConj=hd.CONJ,nt=timeSteps)
+    arts[5].RDAG( hConj=5,     R1=5.28e3,                   tConj=hd.CONJ,nt=timeSteps)
 
-    arts[6].jDAG( hConj=5,      dArts=[arts[7], arts[8]],   tConj=hd.CONJ,nt=timeSteps) 
-    arts[7].RtDAG( hConj=7,     Rt= 0.724,                    tConj=hd.CONJ,nt=timeSteps)
-    arts[8].RtDAG( hConj=7,     Rt= 0.724,                    tConj=hd.CONJ,nt=timeSteps)
+    # arts[6].jDAG( hConj=5,     dArts=[arts[7], arts[8]],    tConj=hd.CONJ,nt=timeSteps) 
 
-    # arts[6].RtDAG( hConj=5,      Rt=1.,                      tConj=hd.CONJ,nt=timeSteps)
-    # arts[7].RtDAG( hConj=10,     Rt=0.724,                    tConj=hd.CONJ,nt=timeSteps)
-    # arts[8].RtDAG( hConj=10,     Rt=0.724,                    tConj=hd.CONJ,nt=timeSteps)
+    # arts[7].RDAG( hConj=7,     R1=5.18e3,                  tConj=hd.CONJ,nt=timeSteps)
+    
+    # arts[8].RDAG( hConj=7,     R1=5.18e3,                  tConj=hd.CONJ,nt=timeSteps)
 
+    # --- clamp here --- 
+    arts[6].RtDAG( hConj=5,    Rt=1.,                      tConj=hd.CONJ,nt=timeSteps) 
+
+    arts[7].RDAG( hConj=10,     R1=5.18e3,                  tConj=hd.CONJ,nt=timeSteps)
+    
+    arts[8].RDAG( hConj=10,     R1=5.18e3,                  tConj=hd.CONJ,nt=timeSteps)
+
+
+
+    # R1 = Impedance(rho,K,A)
+    # C1 = 0
+
+    # arts[0].iDAG(   hConj=0,        dArts=[arts[1], arts[2]],
+    #                 xType="inQ",    xData=Q_Input,
+    #                 FData=F_Input,  HData=H_Input,          tConj=hd.CONJ,nt=timeSteps)
+    
+    # arts[1].RCRDAG( hConj=1,    R1 = R1[1], 
+    #                             R2 = 5.28e3-R1[1],
+    #                             C1 = C1,                    tConj=hd.CONJ,nt=timeSteps)
+
+    # arts[2].jDAG(  hConj=1,    dArts=[arts[3],arts[4]],     tConj=hd.CONJ,nt=timeSteps)
+    
+    # arts[3].RCRDAG( hConj=3,    R1 = R1[3], 
+    #                             R2 = 5e3-R1[3],
+    #                             C1 = C1,                    tConj=hd.CONJ,nt=timeSteps)
+
+    # arts[4].jDAG(  hConj=3,    dArts=[arts[5],arts[6]],     tConj=hd.CONJ,nt=timeSteps)
+
+    # arts[5].RCRDAG( hConj=5,    R1 = R1[5], 
+    #                             R2 = 5.28e3-R1[5],
+    #                             C1 = C1,                    tConj=hd.CONJ,nt=timeSteps)
+
+    # arts[6].jDAG( hConj=5,     dArts=[arts[7], arts[8]],    tConj=hd.CONJ,nt=timeSteps) 
+
+    # arts[7].RCRDAG( hConj=7,    R1 = R1[7], 
+    #                             R2 = 5.18e3-R1[7],
+    #                             C1 = C1,                    tConj=hd.CONJ,nt=timeSteps)
+    
+    # arts[8].RCRDAG( hConj=7,    R1 = R1[8], 
+    #                             R2 = 5.18e3-R1[8],
+    #                             C1 = C1,                    tConj=hd.CONJ,nt=timeSteps)
+
+
+    # iart = 0 ; ihconj = 0 ; itconj = iart + 1 ;
+    # arts[iart].daughterArts = [arts[1],arts[2]] ;
+    # # Head point
+    # arts[iart].headPt.append(point(ihconj));
+    # arts[iart].headPt[0].type = "inQ"   ; arts[iart].headPt[0].data = Q_Input   ;
+    # # Tail point
+    # arts[iart].tailPt.append(point(itconj));
+    # arts[iart].tailPt[0].type = hd.CONJ    ; arts[iart].tailPt[0].data = np.zeros(timeSteps);
+
+    # iart = 1 ; ihconj = 1 ; itconj = iart + 1 ;
+    # # Head point
+    # arts[iart].headPt.append(point(ihconj));
+    # arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # # Tail point
+    # arts[iart].tailPt.append(point(itconj));
+    # arts[iart].tailPt[0].type = "outP"  ; arts[iart].tailPt[0].data = P_Output     ;
+
+    # iart = 2 ; ihconj = 1 ; itconj = iart + 1 ;
+    # arts[iart].daughterArts = [arts[3],arts[4]] ;
+    # # Head point
+    # arts[iart].headPt.append(point(ihconj));
+    # arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # # Tail point
+    # arts[iart].tailPt.append(point(itconj));
+    # arts[iart].tailPt[0].type = hd.CONJ    ; arts[iart].tailPt[0].data = np.zeros(timeSteps);
+
+    # iart = 3 ; ihconj = 3 ; itconj = iart + 1 ;
+    # # Head point
+    # arts[iart].headPt.append(point(ihconj));
+    # arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # # Tail point
+    # arts[iart].tailPt.append(point(itconj));
+    # arts[iart].tailPt[0].type = "outP"  ; arts[iart].tailPt[0].data = P_Output     ;
+
+    # iart = 4 ; ihconj = 3 ; itconj = iart + 1 ;
+    # arts[iart].daughterArts = [arts[5],arts[6]] ;
+    # # Head point
+    # arts[iart].headPt.append(point(ihconj));
+    # arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # # Tail point
+    # arts[iart].tailPt.append(point(itconj));
+    # arts[iart].tailPt[0].type = hd.CONJ    ; arts[iart].tailPt[0].data = np.zeros(timeSteps);
+
+    # iart = 5 ; ihconj = 5 ; itconj = iart + 1 ;
+    # # Head point
+    # arts[iart].headPt.append(point(ihconj));
+    # arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # # Tail point
+    # arts[iart].tailPt.append(point(itconj));
+    # arts[iart].tailPt[0].type = "outP"  ; arts[iart].tailPt[0].data = P_Output     ;
+
+    # iart = 6 ; ihconj = 5 ; itconj = iart + 1 ;
+    # arts[iart].daughterArts = [arts[7],arts[8]] ;
+    # # Head point
+    # arts[iart].headPt.append(point(ihconj));
+    # arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # # Tail point
+    # arts[iart].tailPt.append(point(itconj));
+    # arts[iart].tailPt[0].type = hd.CONJ    ; arts[iart].tailPt[0].data = np.zeros(timeSteps);
+
+    # iart = 7 ; ihconj = 7 ; itconj = iart + 1 ;
+    # # Head point
+    # arts[iart].headPt.append(point(ihconj));
+    # arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # # Tail point
+    # arts[iart].tailPt.append(point(itconj));
+    # arts[iart].tailPt[0].type = "outP"  ; arts[iart].tailPt[0].data = P_Output     ;
+
+    # iart = 8 ; ihconj = 7 ; itconj = iart + 1 ;
+    # # Head point
+    # arts[iart].headPt.append(point(ihconj));
+    # arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # # Tail point
+    # arts[iart].tailPt.append(point(itconj));
+    # arts[iart].tailPt[0].type = "outP"  ; arts[iart].tailPt[0].data = P_Output     ;
+
+    # --- clamp here ---
+    # iart = 6 ; ihconj = 5 ; itconj = iart + 1 ;
+    # arts[iart].daughterArts = [] ;
+    # # Head point
+    # arts[iart].headPt.append(point(ihconj));
+    # arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # # Tail point
+    # arts[iart].tailPt.append(point(itconj));
+    # arts[iart].tailPt[0].type = "outRt"    ; arts[iart].tailPt[0].data = np.ones(timeSteps);
+
+    # iart = 7 ; ihconj = 10 ; itconj = iart + 1 ;
+    # # Head point
+    # arts[iart].headPt.append(point(ihconj));
+    # arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # # Tail point
+    # arts[iart].tailPt.append(point(itconj));
+    # arts[iart].tailPt[0].type = "outP"  ; arts[iart].tailPt[0].data = P_Output     ;
+
+    # iart = 8 ; ihconj = 10 ; itconj = iart + 1 ;
+    # # Head point
+    # arts[iart].headPt.append(point(ihconj));
+    # arts[iart].headPt[0].type = hd.CONJ    ; arts[iart].headPt[0].data = np.zeros(timeSteps);
+    # # Tail point
+    # arts[iart].tailPt.append(point(itconj));
+    # arts[iart].tailPt[0].type = "outP"  ; arts[iart].tailPt[0].data = P_Output     ;
 
     ############################
        # Network definition

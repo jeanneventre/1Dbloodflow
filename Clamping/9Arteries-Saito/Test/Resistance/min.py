@@ -1,38 +1,34 @@
-from help_Input     import *
 import sys, getopt
 import os
 import numpy    as np
 import math     as mt
+import scipy    as sp
 
 from bfS_libDef import *
 
 from help_Input     import *
 
 from help_Sum       import *
+from help_Wave      import *
+from help_Geometry  import *
 from help_Inlet     import *
+from help_Network   import *
 
 import  help_Output as out
 import csv
 
 from scipy.interpolate import interp1d
 
-def main(argv) :
-	# -----------------------------------------------------
-    # ---- PATH 
-	hd = header()
-	hd.headerInput(argv) ; 
+import matplotlib.pyplot as plt
 
-	# LINUX
+def main(argv) :
+
 	HOME    = "/home/ventre/"
 	PATHs   = "Documents/Boulot/Thèse/code/bloodflow/bloodflow/scripts/Clamping/9Arteries-Saito/"
-	State   = "Clamp"
-	# # MAC 
- 	# HOME    = "/Users/jeanneventre/"
-	# PATHs   = "Documents/Boulot/Thèse/code/bloodflow/scripts/Clamping/9Arteries-Saito/"
+	State   = "Test/"
 
 	integ = PATHs + State 
-	# -----------------------------------------------------
-    # ---- READ RESULTS IN FILES 
+
 	liX         = []
 	liY         = []
 	lFileSep    = []
@@ -40,9 +36,9 @@ def main(argv) :
 
 	os.chdir(HOME)
 	liX.append(0)
-	liY.append([1,2,3,4,5,6,7,8,9])
+	liY.append([1,2,3,4,5,6])
 	lFileSep.append(",")
-	lFile.append( PATHs + State + "/" + "res_nu.csv")
+	lFile.append( PATHs + State + "res.csv") 
 	nplot = len(lFile)
 	for j in range(0,nplot):	
 		Data = np.genfromtxt(lFile[j], delimiter =  str(lFileSep[j]))
@@ -67,16 +63,15 @@ def main(argv) :
 	iL1m   = np.argmin(Data[:,cols-2])
 	iL2m   = np.argmin(Data[:,cols-1])
 
-	nuv   = Data[iL2m,0]
-	Q     = Data[iL2m,1]
-	Tej   = Data[iL2m,2]
-	Rt    = Data[iL2m,3]
-	C     = Data[iL2m,4]
-	print('nuv  = ',nuv)
+	Q     = Data[iL2m,0]
+	Tej   = Data[iL2m,1]
+	R2    = Data[iL2m,2]
+	C     = Data[iL2m,3]
 	print('Q    = ', Q)
 	print('Tej  = ', Tej)
-	print('Rt   = ', Rt)
+	print('R2   = ', R2)
 	print('C    = ', C)
+
 
 if __name__ == "__main__":
 	main(sys.argv[1:])

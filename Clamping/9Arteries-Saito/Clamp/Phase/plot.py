@@ -50,7 +50,7 @@ def main(argv) :
     P1       = hd.P1
     Rt2      = hd.P2   
 
-    State = "Clamp"
+    State = "Clamp/Phase"
 
     # PATH    = PATH1D + State + "/" + NN + "/" + Conj + "/nuv=" + nuv +  "/Q=" + Q + "/P1=" + P1 + "/Nx=" + Nx + "/xOrder=" + xOrder + "/dt=" + dt + "/tOrder=" + tOrder + "/" + Solver + "/" + HR + "/"
     PATH = argv[1]
@@ -116,35 +116,33 @@ def main(argv) :
     os.chdir(HOME)
     integ = PATHs + State
     os.chdir(integ)
-    fileName = 'res_nu.csv' 
+    fileName = 'res.csv' 
 
-    # if (float(nuv) == 5e4) and (float(Q) == 600)  and (float(Rt2) == 2000) and (float(C) == 1e-6) :
-    #     os.remove(fileName)
+    if (float(nuv) == 5e4) and (float(Q) == 400)  and (float(Rt2) == 1000) and (float(C) == 1e-4) :
+        os.remove(fileName)
         # fh = open(fileName, 'w')
         # fh.write(" nuv, \t E, \t Rt, \t a,\t b, \t (a-b) \t \n")
 
     fh = open(fileName, 'a')
-    fh.write("%d, \t %d, \t %.2f, \t %d, \t %.20f, \t %.20f, \t %.20f, \t %.20f, \t %.20f"%(float(nuv), float(Q),float(P1),float(Rt2),float(C), R2, Linf, L1,L2) + "\n")
+    fh.write("%d, \t %.2f, \t %.20f, \t %.20f, \t %.20f, \t %.20f, \t %.20f,  \t %.20f"%(float(Q),float(P1), 1750, 1e-06, R2, Linf, L1,L2) + "\n")
     # -----------------------------------------------------
     # ---- PLOT RESULTS
     # # TEST PLOT
     ax = plt.gca()
     ax.yaxis.set_tick_params(labelsize=12)
     ax.xaxis.set_tick_params(labelsize=12)
-    plt.plot(t,Pexp,'k', linewidth= 2, label='Experimental')
-    plt.plot(tt[8:71:2],D[8:71:2],'r^-',linewidth=1,ms=7,label= 'Simulated')
-    # plt.plot(Data[:,0], Data[:,3], label='Simulated') 
+    plt.plot(t,Pexp,linewidth= 2, label='Experimental')
+    plt.plot(tt[8:71],D[8:71],linewidth=2,label= 'Simulated')
+    plt.plot(Data[:,0], Data[:,3], label='Simulated') 
     # plt.xlim([-0.1,2*0.57])  
-    # plt.ylim([50,145])
-    plt.xlabel('Time (s)', fontsize=12)
-    plt.ylabel('Pressure (mmHg)',fontsize=12)
-    # plt.text(0.42,100, " Q = %d \n Tej = %.2f \n"%(float(Q),0.36),fontsize =14)
-    plt.text(0.42,90, "nuv = %d \n Q = %d \nTej = %.2f \nR1 = %d \nR2 = %d \nC = %.7f "%(float(nuv),float(Q), float(P1), 720, float(Rt2), float(C)), fontsize=14)
+    # plt.ylim([60,150])
+    plt.xlabel('time (s)', fontsize=12)
+    plt.ylabel('pressure (mmHg)',fontsize=12)
+    # plt.text(0.42,100, "Q = %d \n Tej = %.2f \n R1 = %d \n R2 = %d \n C = %.7f "%(float(Q),0.35,float(R1) , float(Rt2), float(C)))
     plt.legend(fontsize=12)
-    # plt.title(" R2 = " + str(R2),fontsize=14)
-    plt.title('Post Clamp pressure wave comparison', fontsize=14)
-    # plt.savefig('postclamp_Q.eps')
-    plt.show()
+    plt.title("Post Clamp pressure RCR in the right radial artery",fontsize=14)
+    
+    # plt.show()
     # 
 
     # # pathlib.Path(Store).mkdir(parents=True, exist_ok=True) 

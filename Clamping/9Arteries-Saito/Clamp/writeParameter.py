@@ -64,7 +64,7 @@ def main(argv) :
     # Boundary properties
     # Inlet
     Q_c = float(hd.Qstr)
-    Tej = 0.35
+    Tej = float(hd.P1)
     # Q_c = 700;
     # Tej = 0.35;
 
@@ -72,20 +72,12 @@ def main(argv) :
     Pout_c  = 0.  ; # Capillary pressure (used in RLC outflow bc)
 
     C1_c = float(hd.Cstr)
-    R1 = float(hd.P1)
-    R2 = float(hd.P2)
+    R2_c = float(hd.P2)
 
     # C1_c = 1e-4
     # R1 = 7.5e2
     # R2 = 15e2
     # R2 = R1 * (1+Rt)/(1-Rt)
-    
-    print("R1    : ", R1)
-    print("R2    : ", R2)
-
-    Rt = (R2 - R1 )/(R1+R2)
-
-    print("Rt    : ", Rt)
 
     # Junction
     fact_c  = 1 ;
@@ -136,10 +128,10 @@ def main(argv) :
     # Density (g/cm^3)
     rho = rho_c
     # Width of the wall (cm)
-    h = np.array( [ 0.16, 0.06, 0.12, 0.06, 0.1, 0.06, 0.1, 0.5, 0.5] )
+    h = np.array( [ 0.16, 0.06, 0.12, 0.06, 0.1, 0.06, 0.1, 0.05, 0.05] )
     # E = np.array( [ 0.4, 0.4, 0.4, 0.6, 0.4, 0.4,0.4, 0.8,0.8 ]) * 1e7
-
-    E = 0.44e7
+    E = np.array([0.4, 0.4,0.4,0.6,0.4,0.4,0.4,0.8,0.8])*1e7
+    # E = 0.44e7
     # dE = np.array([0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2])*1e7
     # E = E+dE
 
@@ -248,6 +240,10 @@ def main(argv) :
     Q_Input = np.zeros(timeSteps)
     for i in range(0,timeSteps):
         Q_Input[i] = Q_c * Q(tt[i]/T_c - int(tt[i]/T_c),Tej)
+    
+    # Qq = np.mean(Q_Input)
+
+    # Q_Input = Qq * np.ones(timeSteps)
 
     V_c         = integrate(tt,Q_Input) / ( te_c / T_c)
     print ("---->Ejection period (s)                : ", T_c)
@@ -273,16 +269,27 @@ def main(argv) :
     #############################
     # Construct network
     #############################
-    print('impedance R1 :     ',Impedance(rho,K,A)[1])
+    R1_c = Impedance(rho, K, A)[1]
+    Rt_c = (R2_c - R1_c)/(R2_c + R1_c) 
+
+    print( "---------> R1 : ", R1_c)
+    print( "---------> R2 : ", R2_c)
+    print( "---------> Rt : ", Rt_c)
+
     
     arts[0].iDAG(   hConj=0,        dArts=[arts[1], arts[2]],
                     xType="inQ",    xData=Q_Input,
                     FData=F_Input,  HData=H_Input,          tConj=hd.CONJ,nt=timeSteps)
     
-    arts[1].RCRDAG( hConj=1,    R1= R1,
+    arts[1].RCRDAG( hConj=1,    R1= R1_c,
                                 C1= C1_c,
-                                R2= R2,                                                        
+                                R2= R2_c-Impedance(rho,K,A)[1],                                                        
                                 tConj=hd.CONJ,nt=timeSteps)
+
+    # arts[1].RCRDAG( hConj=1,    R1= R1,
+    #                             C1= C1_c,
+    #                             R2= R2,                                                        
+    #                             tConj=hd.CONJ,nt=timeSteps)
     
     arts[2].jDAG(  hConj=1,     dArts=[arts[3],arts[4]],    tConj=hd.CONJ,nt=timeSteps)
     
@@ -290,7 +297,7 @@ def main(argv) :
 
     arts[4].jDAG(  hConj=3,     dArts=[arts[5],arts[6]],    tConj=hd.CONJ,nt=timeSteps)
 
-    arts[5].RtDAG( hConj=5,     Rt=0.65,                    tConj=hd.CONJ,nt=timeSteps)
+    arts[5].RtDAG( hConj=5,     Rt=Rt_c,                    tConj=hd.CONJ,nt=timeSteps)
 
     # clamp here -------
     arts[6].RtDAG( hConj=5,      Rt=1.,                      tConj=hd.CONJ,nt=timeSteps)

@@ -59,8 +59,7 @@ def main(argv) :
     # Time properties
     T_c     = 0.57 ;
     ts_c    = 10. * T_c ;
-    te_c    = 15. * T_c ; 
-
+    te_c    = 12. * T_c ; 
 
     # P1 = float(hd.P1)
 
@@ -78,7 +77,7 @@ def main(argv) :
 
     C1_c = float(hd.Cstr)
     # # Rt   = float(hd.Rtstr)
-    # R1 = float(hd.Rtstr)
+    # R1 = float(hd.P1)
     R2_c = float(hd.P2)
 
     # Rt = (R2 - R1 )/(R1+R2)
@@ -311,13 +310,13 @@ def main(argv) :
     #############################
 
     R1_c = Impedance(rho, K, A)[1]
-    # print(Impedance(rho, K, A)[1])
+    R1_c = 639
     Rt_c = (R2_c - R1_c)/(R2_c + R1_c) 
 
     print( "---------> R1 : ", R1_c)
     print( "---------> R2 : ", R2_c)
     print( "---------> Rt : ", Rt_c)
-    
+
     arts[0].iDAG(   hConj=0,        dArts=[arts[1], arts[2]],
                     xType="inQ",    xData=Q_Input,
                     FData=F_Input,  HData=H_Input,          tConj=hd.CONJ,nt=timeSteps)

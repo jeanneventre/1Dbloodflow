@@ -64,7 +64,6 @@ def main(argv) :
     Q        = hd.Qstr
     P1       = hd.P1
     Rt2      = hd.P2   
-    # R1       = hd.Rtstr
 
     State = "Test"
 
@@ -139,20 +138,20 @@ def main(argv) :
     L2   = np.sqrt(sp.integrate.trapz((Pexp-D)**2, dx=0.01))/np.sqrt(sp.integrate.trapz(Pexp**2,dx=0.01))
     # -----------------------------------------------------
     # ---- WRITE RESULTS IN FILES 
-    # os.chdir(HOME)
-    # integ = PATHs + State
-    # os.chdir(integ)
-    # fileName = 'res_nu.csv' 
+    os.chdir(HOME)
+    integ = PATHs + State
+    os.chdir(integ)
+    fileName = 'res.csv' 
 
     # if (float(nuv) == 5e4) and (float(Rt2) == 7000) and (float(Q) == 300) and (float(P1) == 0.35) and (float(C)==1e-5):
     #     os.remove(fileName)
     #     fh = open(fileName, 'w')
         # fh.write(" nuv, \t E, \t Rt, \t a,\t b, \t (a-b) \t \n")
 
-    # fh = open(fileName, 'a')
+    fh = open(fileName, 'a')
     # fh.write("%d, \t %.2f, \t %.d, \t %.20f, \t %.20f, \t %.20f, \t %.20f,  \t %.20f"%(float(Q), float(P1),float(Rt2), float(C), R2, Linf, L1,L2) + "\n")  
 
-    # fh.write("%d, \t %d, \t %.2f, \t %d, \t %.20f, \t %.20f, \t %.20f, \t %.20f, \t %.20f"%(float(nuv), float(Q),float(P1),float(Rt2),float(C), R2, Linf, L1,L2) + "\n")
+    fh.write("%d, \t %d, \t %.2f, \t %d, \t %.20f, \t %.20f, \t %.20f, \t %.20f, \t %.20f"%(float(nuv), float(Q),float(P1),float(Rt2),float(C), R2, Linf, L1,L2) + "\n")
     # -----------------------------------------------------
     # ---- PLOT RESULTS
         
@@ -167,15 +166,15 @@ def main(argv) :
     # plt.plot(Data[:,0], np.mean(Data[4*102:1020,1])*np.ones(Data[:,0].shape))
         # plt.xlim([-0.1,2*0.57])
 
-    # plt.ylim([50,180])
+    # plt.ylim([50,200])
     plt.xlabel('Time (s)', fontsize=12)
     plt.ylabel('Pressure (mmHg)',fontsize=12)
     plt.text(0.35,85, "nuv = %d \n Q = %d \nTej = %.2f \nR1 = %d \nR2 = %d \nC = %.7f "%(float(nuv),float(Q), float(hd.P1), 720, float(Rt2), float(C)), fontsize=14)
     # plt.text(0.4,85, " Q = %d \n Tej = %.2f \n"%(float(Q),float(P1)),fontsize =14)
     plt.legend(fontsize=12)
     plt.title('Pre Clamp pressure wave comparison',fontsize=14)
-    # plt.savefig('Best_pre_clamp2.eps')
-    plt.show()
+    # plt.savefig('Best_pre_clamp2.png')
+    # plt.show()
 
     # pathlib.Path(Store).mkdir(parents=True, exist_ok=True) 
     # os.chdir(HOME)

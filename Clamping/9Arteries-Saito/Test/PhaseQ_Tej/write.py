@@ -48,7 +48,7 @@ def main(argv) :
     # write_Opt_t(cls=wb,numArt=iArt,lX=lX,pType='U')
     # write_Opt_t(cls=wb,numArt=iArt,lX=lX,pType='T')
 
-    for iArt in [0.,1.,5.,7.,8.] :
+    for iArt in [1.] :
 
         lX = [ 0., L[iArt]/2., L[iArt]]
 
