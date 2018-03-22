@@ -1,0 +1,2111 @@
+
+
+*******************************************************************************
+Wed Feb  7 15:42:26 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 412315            delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : -2.25517e-10
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:43:17 2018
+
+
+FIT:    data read from '14aorta_post.txt' us 1:2
+        #datapoints = 63
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 53770             delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 45035.6
+rel. change during last iteration : -1.19247e-12
+
+degrees of freedom    (FIT_NDF)                        : 62
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 26.9515
+variance of residuals (reduced chisquare) = WSSR/ndf   : 726.381
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 95.5368          +/- 3.396        (3.554%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:44:41 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 23079.6           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 95.5368
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : -4.56451e-12
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:44:50 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15038.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : -1.20956e-16
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:45:14 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15038.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:45:14 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 412315            delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : -2.25517e-10
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:45:20 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15038.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:45:20 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15038.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 83.7622
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:45:33 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15038.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:45:33 2018
+
+
+FIT:    data read from '14aorta_post.txt' us 1:2
+        #datapoints = 63
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 53770             delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 83.7622
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 45035.6
+rel. change during last iteration : -1.19247e-12
+
+degrees of freedom    (FIT_NDF)                        : 62
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 26.9515
+variance of residuals (reduced chisquare) = WSSR/ndf   : 726.381
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 95.5368          +/- 3.396        (3.554%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:45:58 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15038.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:45:58 2018
+
+
+FIT:    data read from '14aorta_post.txt' us 1:2
+        #datapoints = 63
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 45035.6           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 95.5368
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 45035.6
+rel. change during last iteration : -1.6156e-16
+
+degrees of freedom    (FIT_NDF)                        : 62
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 26.9515
+variance of residuals (reduced chisquare) = WSSR/ndf   : 726.381
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 95.5368          +/- 3.396        (3.554%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:46:13 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15038.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:46:13 2018
+
+
+FIT:    data read from '14aorta_post.txt' us 1:2
+        #datapoints = 63
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 45035.6           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 95.5368
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 45035.6
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 62
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 26.9515
+variance of residuals (reduced chisquare) = WSSR/ndf   : 726.381
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 95.5368          +/- 3.396        (3.554%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:46:23 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15038.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:46:23 2018
+
+
+FIT:    data read from '14aorta_post.txt' us 1:2
+        #datapoints = 63
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 45035.6           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 95.5368
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 45035.6
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 62
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 26.9515
+variance of residuals (reduced chisquare) = WSSR/ndf   : 726.381
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 95.5368          +/- 3.396        (3.554%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:46:25 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15038.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:46:25 2018
+
+
+FIT:    data read from '14aorta_post.txt' us 1:2
+        #datapoints = 63
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 45035.6           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 95.5368
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 45035.6
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 62
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 26.9515
+variance of residuals (reduced chisquare) = WSSR/ndf   : 726.381
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 95.5368          +/- 3.396        (3.554%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:48:23 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15038.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:48:23 2018
+
+
+FIT:    data read from '14aorta_post.txt' us 1:2
+        #datapoints = 63
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 45035.6           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 95.5368
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 45035.6
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 62
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 26.9515
+variance of residuals (reduced chisquare) = WSSR/ndf   : 726.381
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 95.5368          +/- 3.396        (3.554%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:48:53 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15038.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:48:53 2018
+
+
+FIT:    data read from '14aorta_post.txt' us 1:2
+        #datapoints = 63
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 45035.6           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 95.5368
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 45035.6
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 62
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 26.9515
+variance of residuals (reduced chisquare) = WSSR/ndf   : 726.381
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 95.5368          +/- 3.396        (3.554%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:49:35 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15038.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:49:35 2018
+
+
+FIT:    data read from '14aorta_post.txt' us 1:2
+        #datapoints = 63
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 45035.6           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 95.5368
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 45035.6
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 62
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 26.9515
+variance of residuals (reduced chisquare) = WSSR/ndf   : 726.381
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 95.5368          +/- 3.396        (3.554%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:49:41 2018
+
+
+FIT:    data read from '9aorta_pre.txt' us 1:2
+        #datapoints = 97
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 33403.1           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 15924.1
+rel. change during last iteration : -1.21448e-12
+
+degrees of freedom    (FIT_NDF)                        : 96
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.8793
+variance of residuals (reduced chisquare) = WSSR/ndf   : 165.877
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 70.3386          +/- 1.308        (1.859%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:49:41 2018
+
+
+FIT:    data read from '6aorta_post.txt' us 1:2
+        #datapoints = 131
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 114262            delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 95.5368
+
+After 2 iterations the fit converged.
+final sum of squares of residuals : 102316
+rel. change during last iteration : -6.70081e-06
+
+degrees of freedom    (FIT_NDF)                        : 130
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 28.0543
+variance of residuals (reduced chisquare) = WSSR/ndf   : 787.046
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 85.9875          +/- 2.451        (2.851%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:50:12 2018
+
+
+FIT:    data read from '6aorta_pre.txt' us 1:2
+        #datapoints = 114
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 84571.9           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 70.3386
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 61928.3
+rel. change during last iteration : -2.13479e-13
+
+degrees of freedom    (FIT_NDF)                        : 113
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 23.4102
+variance of residuals (reduced chisquare) = WSSR/ndf   : 548.038
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 84.4321          +/- 2.193        (2.597%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:50:12 2018
+
+
+FIT:    data read from '6aorta_post.txt' us 1:2
+        #datapoints = 131
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 102316            delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 85.9875
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 102316
+rel. change during last iteration : -3.93964e-14
+
+degrees of freedom    (FIT_NDF)                        : 130
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 28.0543
+variance of residuals (reduced chisquare) = WSSR/ndf   : 787.046
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 85.9875          +/- 2.451        (2.851%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:50:30 2018
+
+
+FIT:    data read from '6aorta_pre.txt' us 1:2
+        #datapoints = 114
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 61928.3           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 84.4321
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 61928.3
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 113
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 23.4102
+variance of residuals (reduced chisquare) = WSSR/ndf   : 548.038
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 84.4321          +/- 2.193        (2.597%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:50:30 2018
+
+
+FIT:    data read from '6aorta_post.txt' us 1:2
+        #datapoints = 131
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 102316            delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 85.9875
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 102316
+rel. change during last iteration : -1.42225e-16
+
+degrees of freedom    (FIT_NDF)                        : 130
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 28.0543
+variance of residuals (reduced chisquare) = WSSR/ndf   : 787.046
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 85.9875          +/- 2.451        (2.851%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:50:34 2018
+
+
+FIT:    data read from '7aorta_pre.txt' us 1:2
+        #datapoints = 103
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 49847.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 84.4321
+
+After 2 iterations the fit converged.
+final sum of squares of residuals : 46915.1
+rel. change during last iteration : -5.77875e-06
+
+degrees of freedom    (FIT_NDF)                        : 102
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 21.4465
+variance of residuals (reduced chisquare) = WSSR/ndf   : 459.952
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 89.7678          +/- 2.113        (2.354%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:50:34 2018
+
+
+FIT:    data read from '7aorta_post.txt' us 1:2
+        #datapoints = 105
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 67097.9           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 85.9875
+
+After 2 iterations the fit converged.
+final sum of squares of residuals : 63915.4
+rel. change during last iteration : -4.43161e-06
+
+degrees of freedom    (FIT_NDF)                        : 104
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 24.7905
+variance of residuals (reduced chisquare) = WSSR/ndf   : 614.571
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 91.4929          +/- 2.419        (2.644%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:50:54 2018
+
+
+FIT:    data read from '9aorta_pre.txt' us 1:2
+        #datapoints = 97
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 52541.1           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 89.7678
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 15924.1
+rel. change during last iteration : -2.54398e-12
+
+degrees of freedom    (FIT_NDF)                        : 96
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.8793
+variance of residuals (reduced chisquare) = WSSR/ndf   : 165.877
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 70.3386          +/- 1.308        (1.859%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:50:55 2018
+
+
+FIT:    data read from '9aorta_post.txt' us 1:2
+        #datapoints = 103
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 42714.3           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 91.4929
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 27418.3
+rel. change during last iteration : -4.8589e-13
+
+degrees of freedom    (FIT_NDF)                        : 102
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.3953
+variance of residuals (reduced chisquare) = WSSR/ndf   : 268.807
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 79.3067          +/- 1.615        (2.037%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:51:43 2018
+
+
+FIT:    data read from '9aorta_pre.txt' us 1:2
+        #datapoints = 97
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15924.1           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 70.3386
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15924.1
+rel. change during last iteration : -3.42685e-16
+
+degrees of freedom    (FIT_NDF)                        : 96
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.8793
+variance of residuals (reduced chisquare) = WSSR/ndf   : 165.877
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 70.3386          +/- 1.308        (1.859%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:51:43 2018
+
+
+FIT:    data read from '9aorta_post.txt' us 1:2
+        #datapoints = 103
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 27418.3           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 79.3067
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 27418.3
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 102
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.3953
+variance of residuals (reduced chisquare) = WSSR/ndf   : 268.807
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 79.3067          +/- 1.615        (2.037%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:51:57 2018
+
+
+FIT:    data read from '9aorta_pre.txt' us 1:2
+        #datapoints = 97
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 15924.1           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 70.3386
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 15924.1
+rel. change during last iteration : -1.14228e-16
+
+degrees of freedom    (FIT_NDF)                        : 96
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 12.8793
+variance of residuals (reduced chisquare) = WSSR/ndf   : 165.877
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 70.3386          +/- 1.308        (1.859%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:51:57 2018
+
+
+FIT:    data read from '9aorta_post.txt' us 1:2
+        #datapoints = 103
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 27418.3           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 79.3067
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 27418.3
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 102
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.3953
+variance of residuals (reduced chisquare) = WSSR/ndf   : 268.807
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 79.3067          +/- 1.615        (2.037%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:52:01 2018
+
+
+FIT:    data read from '14aorta_pre.txt' us 1:2
+        #datapoints = 58
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 25489.8           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 70.3386
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 15038.5
+rel. change during last iteration : -5.93252e-12
+
+degrees of freedom    (FIT_NDF)                        : 57
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16.2429
+variance of residuals (reduced chisquare) = WSSR/ndf   : 263.832
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 83.7622          +/- 2.133        (2.546%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:52:01 2018
+
+
+FIT:    data read from '14aorta_post.txt' us 1:2
+        #datapoints = 63
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 61630.9           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 79.3067
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 45035.6
+rel. change during last iteration : -2.26539e-12
+
+degrees of freedom    (FIT_NDF)                        : 62
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 26.9515
+variance of residuals (reduced chisquare) = WSSR/ndf   : 726.381
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 95.5368          +/- 3.396        (3.554%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:52:15 2018
+
+
+FIT:    data read from '6aorta_pre.txt' us 1:2
+        #datapoints = 114
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 61979.4           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 83.7622
+
+After 2 iterations the fit converged.
+final sum of squares of residuals : 61928.3
+rel. change during last iteration : -6.24587e-08
+
+degrees of freedom    (FIT_NDF)                        : 113
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 23.4102
+variance of residuals (reduced chisquare) = WSSR/ndf   : 548.038
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 84.4321          +/- 2.193        (2.597%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:52:15 2018
+
+
+FIT:    data read from '6aorta_post.txt' us 1:2
+        #datapoints = 131
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 114262            delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 95.5368
+
+After 2 iterations the fit converged.
+final sum of squares of residuals : 102316
+rel. change during last iteration : -6.70081e-06
+
+degrees of freedom    (FIT_NDF)                        : 130
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 28.0543
+variance of residuals (reduced chisquare) = WSSR/ndf   : 787.046
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 85.9875          +/- 2.451        (2.851%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:52:25 2018
+
+
+FIT:    data read from '7aorta_pre.txt' us 1:2
+        #datapoints = 103
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 49847.5           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 84.4321
+
+After 2 iterations the fit converged.
+final sum of squares of residuals : 46915.1
+rel. change during last iteration : -5.77875e-06
+
+degrees of freedom    (FIT_NDF)                        : 102
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 21.4465
+variance of residuals (reduced chisquare) = WSSR/ndf   : 459.952
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 89.7678          +/- 2.113        (2.354%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed Feb  7 15:52:25 2018
+
+
+FIT:    data read from '7aorta_post.txt' us 1:2
+        #datapoints = 105
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 67097.9           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 85.9875
+
+After 2 iterations the fit converged.
+final sum of squares of residuals : 63915.4
+rel. change during last iteration : -4.4316e-06
+
+degrees of freedom    (FIT_NDF)                        : 104
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 24.7905
+variance of residuals (reduced chisquare) = WSSR/ndf   : 614.571
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 91.4929          +/- 2.419        (2.644%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Thu Feb  8 11:31:25 2018
+
+
+FIT:    data read from '7aorta_pre.txt' us 1:2
+        #datapoints = 103
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 858526            delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 46915.1
+rel. change during last iteration : -1.5073e-11
+
+degrees of freedom    (FIT_NDF)                        : 102
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 21.4465
+variance of residuals (reduced chisquare) = WSSR/ndf   : 459.952
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 89.7678          +/- 2.113        (2.354%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Thu Feb  8 11:31:25 2018
+
+
+FIT:    data read from '7aorta_post.txt' us 1:2
+        #datapoints = 105
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 923758            delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 63915.4
+rel. change during last iteration : -1.08574e-11
+
+degrees of freedom    (FIT_NDF)                        : 104
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 24.7905
+variance of residuals (reduced chisquare) = WSSR/ndf   : 614.571
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 91.493           +/- 2.419        (2.644%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Thu Feb  8 11:32:18 2018
+
+
+FIT:    data read from '7aorta_pre.txt' us 1:2
+	x range restricted to [1.03256 : 1.03428]
+	y range restricted to [89.4929 : 89.9748]
+BREAK:          No data to fit 
+
+
+
+*******************************************************************************
+Thu Feb  8 11:32:43 2018
+
+
+FIT:    data read from '7aorta_pre.txt' us 1:2
+        #datapoints = 103
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 46915.1           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 89.7678
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 46915.1
+rel. change during last iteration : -1.55088e-16
+
+degrees of freedom    (FIT_NDF)                        : 102
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 21.4465
+variance of residuals (reduced chisquare) = WSSR/ndf   : 459.952
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 89.7678          +/- 2.113        (2.354%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Thu Feb  8 11:32:43 2018
+
+
+FIT:    data read from '7aorta_post.txt' us 1:2
+        #datapoints = 105
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 63915.4           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 91.493
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 63915.4
+rel. change during last iteration : -5.69187e-16
+
+degrees of freedom    (FIT_NDF)                        : 104
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 24.7905
+variance of residuals (reduced chisquare) = WSSR/ndf   : 614.571
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 91.493           +/- 2.419        (2.644%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
+
+
+*******************************************************************************
+Thu Feb  8 11:32:55 2018
+
+
+FIT:    data read from '7aorta_pre.txt' us 1:2
+        #datapoints = 103
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 46915.1           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+a               = 89.7678
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 46915.1
+rel. change during last iteration : -3.10175e-16
+
+degrees of freedom    (FIT_NDF)                        : 102
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 21.4465
+variance of residuals (reduced chisquare) = WSSR/ndf   : 459.952
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 89.7678          +/- 2.113        (2.354%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Thu Feb  8 11:32:55 2018
+
+
+FIT:    data read from '7aorta_post.txt' us 1:2
+        #datapoints = 105
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 63915.4           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1
+
+initial set of free parameter values
+
+b               = 91.493
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 63915.4
+rel. change during last iteration : -4.5535e-16
+
+degrees of freedom    (FIT_NDF)                        : 104
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 24.7905
+variance of residuals (reduced chisquare) = WSSR/ndf   : 614.571
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+b               = 91.493           +/- 2.419        (2.644%)
+
+
+correlation matrix of the fit parameters:
+
+               b      
+b               1.000 
