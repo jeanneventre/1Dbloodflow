@@ -28,6 +28,7 @@ def main(argv):
 	t_e      = 10
 	t        = np.linspace(t_s,t_e,N)
 	dt       = (t_e - t_s)/N
+	
 	#############
 	# Production
 	#############
@@ -48,7 +49,7 @@ def main(argv):
 	# Absorption 
 	#############
 	Rout     = 7.5 # mmHg/ml/min
-	Pd       = Pr - Q_pulse[0] / Rout # mmHg
+	Pd       = Pr - Q_pulse[0] * Rout # mmHg
 
 	#############
 	# Pression intracranienne 
@@ -59,13 +60,6 @@ def main(argv):
 		# Euler explicite
 	for i in range(N-1):
 		P[i+1] = P[i] + dt * K * (P[i] * Q_pulse[i]  - P[i] * (P[i] - Pd) /Rout)
-
-		# solution analytique
-	Pic      = np.zeros(N)
-	Pp       = P[0]
-
-	for i in range(N):
-		Pic[i] = Pp * exp(K*t[i]*Pr/Rout)/(1+Pp/Pr * (exp(K*t[i]*Pr/Rout)-1))
 
 		# Runge Kutta 4 
 	def f(t,P,K,T,Amp,Pd,Rout):
@@ -81,20 +75,9 @@ def main(argv):
 		k4 = f(t[i]+dt, PRK4[i] + k3 *dt,K,T,Amp,Pd,Rout)
 		PRK4[i+1] = PRK4[i] + (k1 + 2 *k2 + 2*k3 + k4) *dt/6
 
-	#############
-	# figures 
-	#############
-
-	plot(t,P,'r',lw = 2, label='Sane')
-	# plot(t[0:N:2000],Pic[0:N:2000],'kx',ms=7,mew = 2, label='Theoretical')
-	# xlabel('time (s)')
-	# ylabel ('Intracranial pressure (mmHg)')
-	# title ('Comparison between analytical and numerical solution for ICP')
-
-	# plot(t,PRK4,'b--', label = 'RK4')
 	
 	#############
-	# Pathologique 
+	# Pathologie 
 	#############
 	Qinf     = 0.025
 	Q_ex     = Qinf * np.ones(N)
@@ -106,15 +89,38 @@ def main(argv):
 	for i in range(N-1):
 		P[i+1] = P[i] + dt * K * (P[i] * (Q_pulse[i]+Q_ex[i])  - P[i] * (P[i] - Pd) /Rout)
 
+	#############
+	# Théorie
+	#############
+
+		# saine
+	Pic      = np.zeros(N)
+	Pp       = P[0]
+
+	for i in range(N):
+		Pic[i] = Pp * exp(K*t[i]*Pr/Rout)/(1+Pp/Pr * (exp(K*t[i]*Pr/Rout)-1))
+
+
+		# pathologique 
 	Pth      = np.zeros(N)
 	Pth[0]   = 8
 
 	for i in range(N):
 		Pth[i] = Pr * (Pr + Rout * Qinf)/(Pr + Rout * Qinf * exp(-K/Rout * (Pr + Rout * Qinf)*t[i]))
 
-	plot(t, Pth)
+	#############
+	# figures 
+	#############
+
+	# plot(t,P,'r',lw = 2, label='Sane')
+	# plot(t[0:N:2000],Pic[0:N:2000],'kx',ms=7,mew = 2, label='Theoretical')
+	# xlabel('time (s)')
+	# ylabel ('Intracranial pressure (mmHg)')
+	# title ('Comparison between analytical and numerical solution for ICP')
+	# plot(t,PRK4,'b--', label = 'RK4')
+	# plot(t, Pth)
 	# figure()
-	plot(t,P,'b',lw = 2, label='Pathological')
+	# plot(t,P,'b',lw = 2, label='Pathological')
 
 	# savefig('icp_constant.eps')
 	legend()
